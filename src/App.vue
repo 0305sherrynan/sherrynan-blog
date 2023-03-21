@@ -1,13 +1,13 @@
-<script setup lang="ts">
-import Header from './components/Header/Header.vue';
-</script>
-
 <template>
-  <Header class="header"></Header>
+  <div>
+    <Layout></Layout>
+  </div>
 </template>
 
-<style scoped lang="less">
-.header{
-  // float: right;
-}
+<script setup lang="ts">
+import Layout from '@/views/layout/index.vue'
+</script>
+
+<style scoped>
+
 </style>
