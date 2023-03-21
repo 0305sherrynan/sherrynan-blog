@@ -1,10 +1,10 @@
 <template>
-    <div>
-        <el-affix :offset="0">
+    <!-- <div class="root"> -->
+        <el-affix :offset="10" target="body">
             <Transition name="head">
                 <div class="header-box">
-                    <el-menu>
-                        <el-menu-item><span>Sherrynan</span></el-menu-item>
+                    <el-menu class="right-box">
+                        <el-menu-item>Sherrynan</el-menu-item>
                     </el-menu>
                     <el-menu mode="horizontal" class="right-box">
                         <el-menu-item>首页<span></span></el-menu-item>
@@ -26,7 +26,7 @@
                 </div>
             </Transition>
         </el-affix>
-    </div>
+    <!-- </div> -->
 </template>
 
 <script setup lang="ts">
@@ -34,88 +34,55 @@ import { returnImg } from '@/utils/img/imgInVite'
 </script>
 
 <style scoped lang="less">
+
+.root{
+}
 .header-box{
+    width: 100%;
     display: flex;
     
     justify-content: space-between;
-    // >*{
-    //     display: inline-block;
-    // }
-    >.right-box{
-        // position: absolute;
-        // right: 0;
-    }
 }
-@keyframes hover_border {
-    0% {
-        content: '';
-        position: absolute;
-        display: inline-block;
-        margin: 0 auto;
-        // margin-left: -5px;
-        bottom: 0;
-        left: 0;
-        height: 10px;
-        width: 0;
-        background-color: #a89d9e;
-    }
-
-    100% {
-        content: "";
-        margin: 0 auto;
-        position: absolute;
-        display: flex;
-        //  margin-left: -5px;
-        //  bottom: auto;
-        //  right: auto;
-        bottom: 0;
-        left: 0;
-        height: 10px;
-        width: 100%;
-        background-color: #a89d9e;
-    }
-}
-.el-menu{
-    border: none;
-}
-.el-menu--horizontal {
-    border-bottom: none !important;
+//定义hover时候的动画
+/deep/.el-sub-menu__title:hover{
+    background-color: transparent !important;
 }
 
-.el-menu-item {
-    margin: 0 20px !important;
-    // border: none !important;
-    // border-bottom: none !important;
-    padding: 0;
-    color: #88add3 !important;
+
+.right-box{
+    /deep/.el-menu-item {
+    &:hover{
+        background-color: transparent ;
+        color: #88add3 !important;
+    }
 
     &::after {
         content: '';
+        position: absolute;
+      left: -100%; //藏在左下角
+      bottom: 0;
+      width: 100%;
+      height: 6px;
+        transition: all 0.3s;
+        background-color: transparent;
+        
     }
 
     &:hover::after {
-        // transform: translateX(100%);
-        animation: hover_border 0.6s;
+        background-color: #88add3;
+        transform: translateX(100%);
+        // animation: hover_border 0.6s;
         /* 让样式在动画结束后维持在结束位置 */
-        animation-fill-mode: forwards;
+        // animation-fill-mode: forwards;
     }
 
 }
-
-//将menu-item的hover、focus修改
-.el-menu--horizontal .el-menu-item:not(.is-disabled):focus,
-.el-menu--horizontal .el-menu-item:not(.is-disabled):hover {
-    background-color: transparent;
-    color: #88add3;
 }
-
-.el-menu--horizontal>.el-menu-item.is-active {
-    background-color: transparent;
-    border-bottom: none;
-    color: #88add3 !important;
-}
-
+/**
+    下拉框
+*/
 .personal-drop-down {
+    
     margin: 0 20px;
 
     .personal-img {
