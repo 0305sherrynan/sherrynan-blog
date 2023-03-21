@@ -7,8 +7,8 @@
                         <el-menu-item>Sherrynan</el-menu-item>
                     </el-menu>
                     <el-menu mode="horizontal" class="right-box">
-                        <el-menu-item>首页<span></span></el-menu-item>
-                        <el-menu-item>记录</el-menu-item>
+                        <el-menu-item><router-link to="/">首页</router-link><span></span></el-menu-item>
+                        <el-menu-item><router-link :to="{name:'daily'}">记录</router-link></el-menu-item>
                         <el-menu-item>文档</el-menu-item>
                         <el-menu-item>关于作者</el-menu-item>
 
