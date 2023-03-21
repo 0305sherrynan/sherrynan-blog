@@ -1,0 +1,55 @@
+.el-menu{
+    //将border设置为0
+    border: none;
+    //将背景颜色设为透明 （字不透，子透的话用opacity）
+    background-color: rgba(0, 0, 0, 0);
+}
+
+.el-menu--horizontal {
+    //el-menu的mode设置为horizontal后的底部样式
+    border-bottom: none !important;
+}
+
+//每一个el-menu-item标签
+.el-menu-item {
+    //只剩下左右margin
+    margin: 0 20px !important;
+    //padding关闭
+    padding: 0 !important;
+    //颜色为白色
+    color:rgb(255, 255, 255);
+    //大小为14px
+    font-size: 14px;
+}
+//每一个el-menu-item标签 （el-menu 的mode设置为horizontal的情况）
+.el-menu--horizontal>.el-menu-item{
+        //只剩下左右margin
+        margin: 0 20px !important;
+        //padding关闭
+        padding: 0 !important;
+        //颜色为白色
+        color:rgb(255, 255, 255);
+        //大小为14px
+        font-size: 14px;
+}
+
+//将menu-item的hover、focus修改
+.el-menu--horizontal .el-menu-item:not(.is-disabled):focus,
+.el-menu--horizontal .el-menu-item:not(.is-disabled):hover {
+    background-color: transparent;
+    color: #88add3;
+}
+
+.el-menu--horizontal>.el-menu-item.is-active {
+    background-color: transparent;
+    border-bottom: none;
+    color: #ffffff !important;
+}
+
+// .el-menu--horizontal>.el-sub-menu:hover{
+//     background-color: red;
+// }
+//设置二级菜单
+.el-sub-menu__title:hover{
+    // background-color: transparent !important;
+}

@@ -1,0 +1,75 @@
+@keyframes wave-1{
+    50%{
+        transform: translateY(15px);
+    }
+}
+
+@keyframes wave-2{
+    50%{
+        transform: translateY(15px);
+    }
+}
+@keyframes wave-3{
+    50%{
+        transform: translateY(20px);
+    }
+}
+@keyframes wave-4{
+    50%{
+        transform: translateY(20px);
+    }
+}
+@keyframes wave-5{
+    50%{
+        transform: translateY(10px);
+    }
+}
+
+@keyframes hover_border{
+    0% {
+        content: '';
+        position: absolute;
+        display: inline-block;
+        margin: 0 auto;
+        // margin-left: -5px;
+        bottom: 0;
+        left: 0;
+        height: 10px;
+        width: 0;
+        background-color: #a89d9e;
+    }
+
+    100% {
+        content: "";
+        margin: 0 auto;
+        position: absolute;
+        display: flex;
+        //  margin-left: -5px;
+        //  bottom: auto;
+        //  right: auto;
+        bottom: 0;
+        left: 0;
+        height: 10px;
+        width: 100%;
+        background-color: #a89d9e;
+    }
+}
+
+@keyframes moreBigMoreSmall{
+    50%{
+    transform: scale(1.1);
+}
+}
+
+/* 首图动画：下移 */
+@keyframes header-effect {
+    0% {
+        opacity: 0;
+        transform: translateY(-50px);
+    }
+
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
