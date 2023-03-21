@@ -7,9 +7,15 @@ import { resolve } from 'path'
 export default defineConfig({
   plugins: [vue()],
   server:{
-    host:'0.0.0.0',//解决vite use--host to expose
-    port:8080,
-    open:true
+    port:8080,//配置打开的端口号
+    open:true,//默认启动时打开brower
+    proxy:{
+      "/zwz":{
+        target:'http://localhost:3000',
+        changeOrigin:true,
+        rewrite: (path) => path.replace(/^\/zwz/, ""),
+      }
+    }
   },
   resolve:{
     alias:[
