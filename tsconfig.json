@@ -15,7 +15,8 @@
     "baseUrl": ".",
     "paths": {
       "@/*": ["src/*"],
-      "/#/*": ["types/*"]
+      // "/#/*": ["types/*"],
+      "#/*": ["src/types/*"]
     },
     "types": ["element-plus/global"]
   },
