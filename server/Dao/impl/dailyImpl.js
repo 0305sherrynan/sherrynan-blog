@@ -10,23 +10,20 @@ module.exports = {
     /**
      * 实现接口
      * getDailyInfo 获取所有的daily信息
-
+     * submitOneDailyInfo 提交单个daily
      */ 
 
     getDailyInfo :(req, res)=>{
+        const query = req.query
         pool.getConnection((err,connection)=>{
-            // console.log(req)
             // const params = req.query
-            connection.query($sql.getDailyInfo,
+            connection.query($sql.getDailyInfo,[query.user_id],
                 (err,result)=>{
                 let r = {}
                 if (result!=false){
-                    // const ulIsShow = result[0].ulIsShow
-                    // const token = result[0].token
-                    // const username = result[0].username
                     console.log(result)
                     r = {
-                        code:true,
+                        code:200,
                         data:result
                     }
                 }
@@ -35,5 +32,23 @@ module.exports = {
             })
         })
     },
+    submitOneDailyInfo:(req, res)=>{
+        const query = req.body
+        pool.getConnection((err,connection)=>{
+            // const params = req.query
+            connection.query($sql.submitOneDailyInfo,[query.description,query.user_id,query.submittime],
+                (err,result)=>{
+                let r = {}
+                if (result!=false){
+                    console.log(result)
+                    r = {
+                        code:200,
+                        data:{message:'提交成功'}
+                    }
+                }
+                $utils.closeConnection(res,r,connection)
 
+            })
+        })
+    },
 }
