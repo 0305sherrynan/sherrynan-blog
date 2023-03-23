@@ -2,11 +2,15 @@
     <div class="root">
         <div v-for="(item, key) in data" class="row-box"
             style="background-color: ; margin-bottom: 20px;width: 100%;height:200px;">
-            <div v-if="key % 2 == 0 ? 1 : 0" class="left-box">123</div>
+            <div v-if="key % 2 == 0 ? 1 : 0" class="left-box">
+                
+            </div>
             <div class="center-box">
                 <div></div>
             </div>
-            <div v-if="key % 2 == 0 ? 0 : 1" class="right-box">456</div>
+            <div v-if="key % 2 == 0 ? 0 : 1" class="right-box">
+                
+            </div>
         </div>
 
     </div>
@@ -101,7 +105,7 @@ let data = [1,2,3,4,5]
             width: 15px;
             height: 15px;
             border-radius: 50%;
-            border: 5px solid yellow;
+            border: 5px solid rgb(91, 70, 209);
             background-color: white;
         }
     }
