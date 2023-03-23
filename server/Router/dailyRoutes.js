@@ -32,6 +32,9 @@ router.get('',(req,res)=>{
     // res.send({'zwz':'123'})
     $sql.getDailyInfo(req,res)
 })
+router.post('',(req,res)=>{
+    $sql.submitOneDailyInfo(req,res)
+})
 
 
 
