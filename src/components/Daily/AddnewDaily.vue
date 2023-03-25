@@ -19,7 +19,13 @@
 <script lang="ts" setup>
 import { ref ,watch} from 'vue'
 import {submitOneDailyInfo} from '@/utils/api/daily'
-import { da } from 'element-plus/es/locale';
+// import { da } from 'element-plus/es/locale';
+import VueMarkdownEditor, { xss } from '@kangc/v-md-editor';
+
+// 调用方法将 markdown 转换成 html 并使用 xss 过滤
+
+
+
 /**
  * data
  * submitTime 提交的时间 格式：2023-03-22 21:10:53
@@ -36,8 +42,10 @@ const submitTime = ref<string>('')
  * submitText 提交单篇daily
  */
 const submitText = async()=>{
+    const html:string = xss.process(VueMarkdownEditor.vMdParser.themeConfig.markdownParser.render(text.value));
+    console.log(html)
     const data = await submitOneDailyInfo(
-                {description:text.value,submittime:submitTime.value})
+                {description:html,submittime:submitTime.value})
                 console.log(data)
 }
 </script>
