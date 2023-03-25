@@ -3,7 +3,12 @@
         <div class="daily-banner" style="animation: header-effect 1s;">
 
         </div>
-        <time-record class="wrap"></time-record>
+        <Suspense>
+            <div class="timerecord-outbox">
+                <time-record class="wrap"></time-record>
+            </div>
+            <template #fallback></template>
+        </Suspense>
     </div>
 </template>
 
@@ -32,5 +37,12 @@ import TimeRecord from '@/components/Daily/TimeRecord.vue'
         background-color: rgb(204, 204, 204);
         z-index: -1;
     }
+}
+.timerecord-outbox{
+    background-image: url('@/assets/img/ideaBrian.jpg');
+    width: 100%;
+    height: 100%;
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
 }
 </style>
