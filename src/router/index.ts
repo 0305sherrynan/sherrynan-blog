@@ -7,6 +7,7 @@ const routes: RouteRecordRaw[] = [
     {
         path: '/',
         name: 'layout',
+        redirect:'/home',
         component: () => import('@/views/blog/layout/index.vue'),
         // meta:{
         //     requiresAuth:true
