@@ -17,10 +17,11 @@ swaggerInstall(app)
 
 //引入course.js等接口
 const daily = require('./Router/dailyRoutes')
-
+const article = require('./Router/articleRoutes')
 
 //使用接口
 app.use('/api/daily',daily)
+app.use('/api/article',article)
 
 app.get('/zwz',(req,res)=>{
     res.send('当前服务器已连接')

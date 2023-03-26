@@ -35,21 +35,18 @@ let utils = {
       },
       //将图片存入本地
       takeUrlToLocal:function(url){
-        // console.log(url)
-        // var reader  = new FileReader();
         if (url) {
-          //reader转为base64
-          // reader.readAsDataURL(url);
-          
           let dataBuffer = Buffer.from(url, 'base64')
-          let name = url.substr(0,5).replace(/\//g,'')
+          let name = Math.random().toString(36).slice(-8)
+          console.log(name)
           //写入到该目录上一级assets文件夹中名字叫image+'png
-          fs.writeFile('src/assets/icon/'+name+'.png', dataBuffer, function(err) {
+          fs.writeFile('../src/assets/db/'+name+'.png', dataBuffer, function(err) {
               if (err) console.log(err)
           })
           let nameAll = name+'.png'
           return nameAll
       }
+      // console.log(hhh)
 }
 }
 module.exports = utils

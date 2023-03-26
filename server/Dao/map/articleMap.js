@@ -1,0 +1,12 @@
+const articleMap = {
+    /**
+     * map层：mysql语句
+     * getDailyInfo 获取daily信息
+    */
+    getArticleInfo:'select * from article where user_id = ?',
+    // submitOneDailyInfo:"insert into daily values(?,?,?)"
+    submitOneArticleInfo:'insert into article values(?,?,?,?,?,?,?,?)',
+    getArticleSortAndNumber:'select sort sortName,count(*) sortCount from article where user_id = ? group by sort',
+    getArticleByArticleid:'select * from article where article_id = ?'
+} 
+module.exports = articleMap
