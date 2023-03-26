@@ -19,10 +19,21 @@ const routes: RouteRecordRaw[] = [
                 component: () => import('@/views/blog/Master/Master.vue'),
             },
             {
-                path: '/daily',
+                path: 'daily',
                 name: 'daily',
                 component: () => import('../views/blog/daily/Daily.vue')
             },
+            {
+                path: 'article',
+                name: 'article',
+                component: () => import('../views/blog/article/index.vue')
+            },
+            {
+                path:'article-detail',
+                name:'article-detail',
+                component: () => import('../views/blog/article-detail/index.vue'),
+                props: route => ({ query: route.query.article_id })
+            }
         ]
     },
 
@@ -35,6 +46,11 @@ const routes: RouteRecordRaw[] = [
                 path:'addDaily',
                 name:'addDaily',
                 component:() => import('@/components/Daily/AddnewDaily.vue')
+            },
+            {
+                path:'AddArticle',
+                name:'AddArticle',
+                component:() => import('@/components/Article/AddNewArticle.vue')
             }
          ]
     }
