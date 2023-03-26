@@ -29,10 +29,10 @@
                     <template #title>
                         <span>
                             <team-outlined />
-                            <span>Team</span>
+                            <span>文章管理</span>
                         </span>
                     </template>
-                    <a-menu-item key="6">Team 1</a-menu-item>
+                    <a-menu-item key="6"><router-link :to="{name:'AddArticle'}">文章增加</router-link></a-menu-item>
                     <a-menu-item key="8">Team 2</a-menu-item>
                 </a-sub-menu>
                 <a-menu-item key="9">
