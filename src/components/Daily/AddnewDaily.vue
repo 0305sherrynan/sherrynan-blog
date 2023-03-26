@@ -10,7 +10,7 @@
             </div>
         </div>
     </div>
-    <v-md-editor v-model="text" height="400px"></v-md-editor>
+    <v-md-editor v-model="text" height="400px"  :include-level="[2, 3]"></v-md-editor>
     <div class="btn-box">
         <a-button type="primary" @click="submitText">提交</a-button>
         <a-button>重置</a-button>
