@@ -33,6 +33,12 @@ const routes: RouteRecordRaw[] = [
                 name:'article-detail',
                 component: () => import('../views/blog/article-detail/index.vue'),
                 props: route => ({ query: route.query.article_id })
+            },
+            {
+                path:'category',
+                name:'category',
+                component: () => import('../views/blog/category/index.vue'),
+                props: route => ({ query: route.query.sortName })
             }
         ]
     },
