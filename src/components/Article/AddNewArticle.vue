@@ -17,6 +17,7 @@
                             <a-select-option value="javascript">javascript</a-select-option>
                             <a-select-option value="css">css</a-select-option>
                             <a-select-option value="vue">vue</a-select-option>
+                            <a-select-option value="leetcode">leetcode</a-select-option>
                         </a-select></a-form-item>
                     <a-form-item label="时间" name="time"> 
                             <el-date-picker v-model="formData.time" type="datetime"
