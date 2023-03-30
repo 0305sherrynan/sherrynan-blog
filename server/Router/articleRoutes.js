@@ -16,6 +16,10 @@ router.get('/:article_id', (req, res) => {
     // res.send({'zwz':'123'})
     $sql.getArticleByArticleid(req, res)
 })
+router.get('/sort/:sortName', (req, res) => {
+    // res.send({'zwz':'123'})
+    $sql.getArticleInfoBySort(req, res)
+})
 
 
 module.exports = router
