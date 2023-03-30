@@ -2,25 +2,16 @@
     <div>
         <Banner></Banner>
         <div class="articlelist-box">
-            <div class="left-list" >
-                <div v-for="(item, key) in userArticleLists" :key="key" @click="goToArticleDetail(item.article_id)">
-                    <h2>{{ item.title }}</h2>
-                    <div class="bottom-info">
-                        <div><user-outlined style="margin-right: 9px;"/><span>{{ item.user_id }}</span></div>
-                        <div><tag-outlined style="margin-right: 9px;"/><span>{{ item.time }}</span></div>
-                        <div><clock-circle-outlined style="margin-right: 9px;"/><span>{{ item.sort }}</span></div>
-                    </div>
-                </div>
-            </div>
+            <article-lists :user-article-lists="userArticleLists"></article-lists>
             <div class="right-info">
                 <div class="Categories">
-                    <!-- <div> -->
+                    <div>
                     <appstore-outlined /><span class="categories-title">Categories</span>
-                    <!-- </div> -->
-                    <div v-for="(item, index) in sortAndNumber" :key="index" class="categories-info">
+                    </div>
+                    <div v-for="(item, index) in sortAndNumber" :key="index" class="categories-info" @click="goToSpecialSortList(item.sortName)"> 
                         <span class="sort-text">{{ item.sortName }}</span>
                         <div class="sort-count">{{ item.sortCount }}</div>
-                    </div>
+                    </div> 
                 </div>
             </div>
         </div>
@@ -32,7 +23,7 @@ import Banner from '@/components/Banner/Banner.vue';
 import { getArticleInfo, getArticleSortAndNumber } from '@/utils/api/article'
 import { articleApi } from '#/api'
 import { useRouter } from 'vue-router';
-
+import ArticleLists from "@/components/Article/ArticleLists.vue";
 
 import {
     UserOutlined,
@@ -54,9 +45,11 @@ const route = useRouter()
 /**
  * methods
  * goToArticleDetail 实现路由跳转至文章详情 携带参数query
+ * goToSpecialSortList 跳转到特殊分类的文章列表
  */
-const goToArticleDetail = (article_id:string)=>{
-    route.push({name:'article-detail',query:{article_id}})
+
+const goToSpecialSortList = (sortName:string)=>{
+    route.push({name:'category',query:{sortName}})
 }
 </script>
 
@@ -76,39 +69,11 @@ const goToArticleDetail = (article_id:string)=>{
         border-radius: 6px;
     }
 
-    .left-list {
-        width: 810px;
-        // height: 200px;
-        margin-right: 40px;
-        
-        >* {
-            box-shadow: rgba(0, 0, 0, 0.1) 0px 1px 8px 0px;
-            margin-top: 30px;
-            padding: 20px;
-            border: 1px solid #e8e8e8;
-            border-radius: 6px;
 
-            &:hover {
-                cursor: pointer;
-                box-shadow: rgba(0, 0, 0, 0.2) 0px 2px 16px 0px;
-            }
-        }
-
-        .bottom-info {
-            display: flex;
-            flex-direction: row;
-            color: rgb(127, 127, 127);
-            font-size: 20px;
-
-            >* {
-                margin-right: 20px;
-            }
-        }
-    }
 
     .right-info {
         width: 200px;
-        height: 200px;
+        height: 100%;
         border: 1px solid #e8e8e8;
         padding: 10px;
         box-shadow: rgba(0, 0, 0, 0.1) 0px 1px 8px 0px;
@@ -129,9 +94,12 @@ const goToArticleDetail = (article_id:string)=>{
                 flex-direction: row;
                 justify-content: space-between;
                padding: 7px;
-    align-items: center;
+                align-items: center;
                 border: 1px solid #e8e8e8;
                 border-radius: 6px;
+                &:hover{
+                    cursor: pointer;
+                }   
 
                 .sort-text {
                     font-size: 20px;
