@@ -88,4 +88,24 @@ module.exports = {
             })
         })
     },
+    
+    getArticleInfoBySort :(req, res)=>{
+        const sort = req.params.sortName
+        const id = req.query.user_id
+        pool.getConnection((err,connection)=>{
+            connection.query($sql.getArticleInfoBySort,[id,sort],
+                (err,result)=>{
+                let r = {}
+                if (result!=false){
+                    console.log(result)
+                    r = {
+                        code:200,
+                        data:result
+                    }
+                }
+                $utils.closeConnection(res,r,connection)
+
+            })
+        })
+    },
 }
