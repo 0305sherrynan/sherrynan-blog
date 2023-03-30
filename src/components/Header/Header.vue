@@ -1,5 +1,4 @@
 <template>
-    <!-- <div class="root"> -->
         <el-affix :offset="10" target="body">
             <Transition name="head">
                 <div class="header-box">
@@ -36,8 +35,7 @@ import { returnImg } from '@/utils/img/imgInVite'
 
 <style scoped lang="less">
 
-.root{
-}
+
 .header-box{
     width: 100%;
     display: flex;
