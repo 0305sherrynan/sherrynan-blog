@@ -1,7 +1,7 @@
 <template>
     <div class="root">
         <div v-for="(item, key) in dailyLists.data" class="row-box"
-            style="background-color: ; margin-bottom: 20px;width: 100%;height:200px;">
+            style="background-color: ; margin-bottom: 20px;width: 100%;">
             <div v-if="key % 2 == 0 ? 1 : 0" class="left-box">
                 <card-content :dailyLists="item" class="card-content"></card-content>
             </div>
@@ -35,14 +35,14 @@ console.log(dailyLists)
     margin: 0 auto;
     width: 1000px;
     display: flex;
-    flex-direction: column;
+    flex-direction: column-reverse;
     // justify-items: center;
     align-items: center;
 }
 
 .row-box {
     position: relative;
-    &:first-child{
+    &:last-child{
         margin-top: 60px;
     }
     // display: flex;
