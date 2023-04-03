@@ -15,16 +15,16 @@ let utils = {
       //返回简单信息的封装
       jsonWrite:  function(res, ret) {
         if(typeof ret === 'undefined'){
-          res.json({
-            result : {
+          res.json(
+           {
               code : false,
               msg : '操作失败'
             }
-          });
+          );
         }else{
-          res.json({
-            result : ret
-          });
+          res.json(
+            ret
+          );
         }
       },
       closeConnection:function(res,result,connection){
