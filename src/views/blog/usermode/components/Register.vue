@@ -6,25 +6,32 @@
                     <h2>Welcome Register</h2>
                     <p>We're so excited to see you again!</p>
                 </section>
-                <form action="">
+                <a-form class="form" :model="registerForm" :rules="rules" ref="formRef" name="custom-validation"
+                    @finish="validateSuccess" @finishFailed="validateError">
                     <div>
-                        <span>Email</span>
-                        <input type="text">
-                    </div>
-                    <div>
-                        <span>NickName</span>
-                        <input type="text">
+                        <span>Email </span>
+                        <a-form-item name="email" has-feedback><a-input v-model:value="registerForm.email" type="text"
+                                placeholder="请输入邮箱"></a-input></a-form-item>
                     </div>
                     <div>
                         <span>Password</span>
-                        <input type="password">
-                        <!-- <a href="">Forget your password</a> -->
+                        <a-form-item name="password" has-feedback ref="formRef"><a-input v-model:value="registerForm.password" type=""
+                                placeholder="请输入最大长度为30的密码"></a-input></a-form-item>
+
                     </div>
-                    <div class="btnLogin">
-                        <span>Sign up</span>
+                    <div>
+                        <span>NickName</span>
+                        <a-form-item name="nickname" has-feedback><a-input v-model:value="registerForm.nickname" type="text"
+                                placeholder="请输入最大长度为30的密码"></a-input></a-form-item>
+
                     </div>
+                    <!-- <div class="btnLogin"> -->
+                    <a-button type="primary" html-type="submit">Sign Up</a-button>
+                    <!-- <span>Log in</span> -->
+                    <!-- <div @click="testGetBtn"> test</div> -->
+                    <!-- </div> -->
                     <span class="login-left-lastSpan">Does exist the account? <a @click="goToRLogin">Sign in</a></span>
-                </form>
+                </a-form>
             </div>
             <div class="login-right">123</div>
         </div>
@@ -32,29 +39,74 @@
 </template>
 
 <script setup lang="ts">
-import { reactive, onMounted } from 'vue';
-// import {registerAccount} from '@/utils/api/user'
-// import { userApi } from '@/types/api';
-// import Message from '@/libs/zwzUI/message';
-import router from '@/router';
-// import {useUserStore} from '@/store/user'
+import { reactive, onMounted,ref } from 'vue';
+
 import { useRouter } from 'vue-router'
+import type { Rule } from 'ant-design-vue/es/form'
+import { judgeEmailRegisted, registerAccount } from '@/utils/api/user'
+import { message } from 'ant-design-vue';
+import {randomId} from '@/utils/random/randomId'
 /**
  * 数据
- * accountForm 表单内容
+ * formRef
+ * registerForm 表单内容
  * userStore
+ * rules 表单规则 validatePass
  */
+const formRef = ref<HTMLFormElement>()
+const reg = {
+    emailRe: /^[a-zA-Z0-9]+([-_.][A-Za-zd]+)*@([a-zA-Z0-9]+[-.])+[A-Za-zd]{2,5}$/
+}
 const route = useRouter()
 const emit = defineEmits(['clickSignUp'])
-// const registerForm = reactive<userApi.registerAccount>({
-//     account:'',
-//     password:'',
-//     nickname:''
-// })
+const registerForm = reactive<User.verify_register_user>({
+    user_id: '',
+    password: '',
+    nickname: '',
+    email: ''
+})
+let validatePass = async (_rule: Rule, value: string) => {
+    if (value === '') {
+        return Promise.reject('Please input the email');
+    } else {
+        if (!reg.emailRe.test(value)) {
+            // console.log(value)
+            return Promise.reject('请输入正确的邮箱格式')
+        }
+    }
+    return Promise.resolve();
+};
+let validatePass2 = async (_rule: Rule, value: string) => {
+    if (value === '') {
+        return Promise.reject('Please input the password');
+    } else {
+        const length = value.length
+        if (length > 30)
+            return Promise.reject('请输入小于长度为30的密码')
+    }
+    return Promise.resolve();
+};
+let validatePass3 = async (_rule: Rule, value: string) => {
+    if (value === '') {
+        return Promise.reject('Please input the nickname');
+    } else {
+        const length = value.length
+        if (length > 20) {
+            // console.log(value)
+            return Promise.reject('请输入小于长度为20的昵称')
+        }
+    }
+    return Promise.resolve();
+};
+const rules: Record<string, Rule[]> = {
+    email: [{ required: true, validator: validatePass, trigger: 'change' }],
+    password: [{ validator: validatePass2, trigger: 'change' }],
+    nickname: [{ validator: validatePass3, trigger: 'change' }],
+};
 // const userStore = useUserStore()
 /**
  * 方法
- * clickBtn 点击登录验证
+ * validateSuccess 验证成功的回调
  */
 const goToRLogin = () => {
     route.push({
@@ -64,6 +116,31 @@ const goToRLogin = () => {
         }
     })
     emit('clickSignUp')
+}
+const validateSuccess = async () => {
+    console.log(registerForm)
+    const { data: data } = await judgeEmailRegisted(registerForm.email)
+    if (data.message == 'error'){
+        message.warning('该邮箱已被注册！')
+        formRef.value?.resetFields()
+    }
+    else {
+        const { data: data } = await registerAccount(Object.assign(registerForm,{user_id:randomId(8)}))
+        if (data.message == 'success') {
+            message.success('成功注册')
+            route.push({
+                name: "entrance",
+                params: {
+                    operate: 'register'
+                }
+            })
+            emit('clickSignUp')
+        }
+    }
+    // console.log(data)
+}
+const validateError = () => {
+
 }
 // const  clickBtn =async ()=>{
 //     const data = await registerAccount(registerForm)
@@ -94,11 +171,15 @@ div:has(.login) {
 
 .login {
     // width: 1000px;
-    display: inline-block;
-    height: 500px;
+    visibility: visible;
+    // display: inline-block;
+    // height: 100vh;
     // background-color: red;
     // border: 1px solid rgb(0,0,0);
-    border-radius: 10px;
+    // background-image: url('@/assets/img/R-C.jpg');
+    // background-size: 100vw 100vh;
+
+    // border-radius: 10px;
     margin: 0 auto;
 
     >* {
@@ -107,15 +188,14 @@ div:has(.login) {
     }
 
     .login-left {
+        text-align: center;
         background-color: #EADDCA;
 
         visibility: visible;
-        // width: 500px;
-        // background-color: rgb(255, 255, 255);
-        border-radius: 15px;
         width: 500px;
         // background-color: rgb(255, 255, 255);
-        height: 100%;
+        border-radius: 15px;
+        // height: 100%;
         border: 1px solid #f6f4f4;
 
         >.login-left-title {
@@ -125,7 +205,7 @@ div:has(.login) {
             }
         }
 
-        >form {
+        >.form {
             >div {
                 margin-top: 20px;
                 padding: 0px 38px 0 38px;
@@ -199,4 +279,5 @@ div:has(.login) {
         width: 500px;
         height: 100%;
     }
-}</style>
+}
+</style>
