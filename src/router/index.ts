@@ -9,14 +9,19 @@ const routes: RouteRecordRaw[] = [
         name: 'layout',
         redirect:'/home',
         component: () => import('@/views/blog/layout/index.vue'),
-        // meta:{
-        //     requiresAuth:true
-        // }
+        meta:{
+            //是否不需要token权限
+            freePass:false
+        },
         children: [
             {
                 path: 'home',
                 name: 'master',
                 component: () => import('@/views/blog/Master/Master.vue'),
+                // meta:{
+                //     //是否不需要token权限
+                //     freePass:false
+                // },
             },
             {
                 path: 'daily',
@@ -39,7 +44,22 @@ const routes: RouteRecordRaw[] = [
                 name:'category',
                 component: () => import('../views/blog/category/index.vue'),
                 props: route => ({ query: route.query.sortName })
-            }
+            },
+            {
+                path:'entrance/:operate',
+                name:'entrance',
+                component:() => import('../views/blog/usermode/index.vue'),
+                props:route => ({params:route.params.operate}),
+                meta:{
+                    //是否不需要token权限
+                    freePass:true
+                }
+            },
+            // {
+            //     path:'register',
+            //     name:'register',
+            //     component:() => import('../views/blog/LoginAndRegi/index.vue')
+            // }
         ]
     },
 
