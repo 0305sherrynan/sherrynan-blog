@@ -19,7 +19,7 @@
                             <el-menu-item><router-link :to="{name:'entrance',params:{operate:'login'}}" >登录</router-link></el-menu-item>
                             <el-menu-item>个人中心</el-menu-item>
                             <el-menu-item>前往后台</el-menu-item>
-                            <!-- <el-menu-item></el-menu-item> -->
+                            <el-menu-item @click="exitAccount">退出</el-menu-item>
                         </el-sub-menu>
 
                     </el-menu>
@@ -30,7 +30,23 @@
 </template>
 
 <script setup lang="ts">
+import { StorageHandler,StorageType } from '@/libs/storage';
 import { returnImg } from '@/utils/img/imgInVite'
+import router from '@/router';
+
+
+/**
+ * methods
+ * exitAccount 退出账号
+ */
+const exitAccount = ()=>{
+    const storage = new StorageHandler()
+    //清除token
+    storage.remove(StorageType.Local,'token')
+    // const router = useRouter()
+    router.push({name:'entrance',params:{operate:'login'}})
+
+}
 </script>
 
 <style scoped lang="less">
