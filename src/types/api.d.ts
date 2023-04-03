@@ -11,9 +11,6 @@ export namespace dailyApi {
     }
 }
 
-
-
-
 export namespace articleApi {
      
     interface getRequestResponse<T> {
@@ -25,4 +22,10 @@ export namespace articleApi {
         code: number,
         data: T
     }
+}
+export namespace userApi{
+    interface postRequestResponse<T> {
+        code: number,
+        data: T
+    } 
 }
