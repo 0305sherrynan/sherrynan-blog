@@ -8,16 +8,16 @@ import {articleApi} from '#/api'
  * getArticleByArticleid 获取article_id的文章
  */
 export const  getArticleInfo = ()=>{
-    return requestInstance.get<any,articleApi.getRequestResponse<Article.Article_all>>("zwz/api/article",{params:{user_id:'26421983'}})
+    return requestInstance.get<any,articleApi.getRequestResponse<Article.Article_all>>("zwz/api/article")
 }
 export const getArticleInfoBySort = (sortName:string)=>{
-    return requestInstance.get<any,articleApi.getRequestResponse<Article.Article_all>>(`zwz/api/article/sort/${sortName}`,{params:{user_id:'26421983'}})
+    return requestInstance.get<any,articleApi.getRequestResponse<Article.Article_all>>(`zwz/api/article/sort/${sortName}`)
 }
 export const submitOneArticleInfo = (data:Article.article_Exclude_userid)=>{
-    return requestInstance.post<any,articleApi.postRequestResponse<{message:string}>>("zwz/api/article",Object.assign(data,{user_id:'26421983'}))
+    return requestInstance.post<any,articleApi.postRequestResponse<{message:string}>>("zwz/api/article",data)
 }
 export const getArticleSortAndNumber = ()=>{
-    return requestInstance.get<any,articleApi.getRequestResponse<Article.article_sort>>("zwz/api/article/sort",{params:{user_id:'26421983'}})
+    return requestInstance.get<any,articleApi.getRequestResponse<Article.article_sort>>("zwz/api/article/sort")
 }
 export const getArticleByArticleid = (article_id:string)=>{
     return requestInstance.get<any,articleApi.getRequestResponse<Article.Article_all>>(`zwz/api/article/${article_id}`)
