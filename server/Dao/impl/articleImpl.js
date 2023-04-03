@@ -14,13 +14,14 @@ module.exports = {
      */ 
     
     getArticleInfo :(req, res)=>{
-        const query = req.query
+        // const query = req.query
+        // console.log(req._id)
         pool.getConnection((err,connection)=>{
-            connection.query($sql.getArticleInfo,[query.user_id],
+            connection.query($sql.getArticleInfo,[req._id],
                 (err,result)=>{
                 let r = {}
                 if (result!=false){
-                    console.log(result)
+                    // console.log(result)
                     r = {
                         code:200,
                         data:result
@@ -35,7 +36,7 @@ module.exports = {
         const query = req.body
         pool.getConnection((err,connection)=>{
             connection.query($sql.submitOneArticleInfo,[query.title,query.description,query.info,
-                                                        $utils.takeUrlToLocal(query.cover),query.time,query.sort,query.user_id,query.article_id],
+                                                        $utils.takeUrlToLocal(query.cover),query.time,query.sort,req._id,query.article_id],
                 (err,result)=>{
                 let r = {}
                 if (result!=false){
@@ -53,9 +54,9 @@ module.exports = {
         })
     },
     getArticleSortAndNumber :(req, res)=>{
-        const query = req.query
+        // const query = req.query
         pool.getConnection((err,connection)=>{
-            connection.query($sql.getArticleSortAndNumber,[query.user_id],
+            connection.query($sql.getArticleSortAndNumber,[req._id],
                 (err,result)=>{
                 let r = {}
                 if (result!=false){
@@ -91,9 +92,9 @@ module.exports = {
     
     getArticleInfoBySort :(req, res)=>{
         const sort = req.params.sortName
-        const id = req.query.user_id
+        // const id = req.query.user_id
         pool.getConnection((err,connection)=>{
-            connection.query($sql.getArticleInfoBySort,[id,sort],
+            connection.query($sql.getArticleInfoBySort,[req._id,sort],
                 (err,result)=>{
                 let r = {}
                 if (result!=false){

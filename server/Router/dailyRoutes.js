@@ -1,7 +1,7 @@
 const express = require('express')
 const router = express.Router()
 const $sql = require('../Dao/impl/dailyImpl.js')
-
+const $jwt = require('../Utils/jwt.js')
 /**,
  * @swagger
  * /api/daily:
@@ -81,11 +81,11 @@ const $sql = require('../Dao/impl/dailyImpl.js')
 
  */
 
-router.get('', (req, res) => {
+router.get('',$jwt.verify, (req, res) => {
     // res.send({'zwz':'123'})
     $sql.getDailyInfo(req, res)
 })
-router.post('', (req, res) => {
+router.post('', $jwt.verify,(req, res) => {
     $sql.submitOneDailyInfo(req, res)
 })
 

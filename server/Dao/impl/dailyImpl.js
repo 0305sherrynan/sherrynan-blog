@@ -14,10 +14,10 @@ module.exports = {
      */ 
 
     getDailyInfo :(req, res)=>{
-        const query = req.query
+        // const query = req.query
         pool.getConnection((err,connection)=>{
             // const params = req.query
-            connection.query($sql.getDailyInfo,[query.user_id],
+            connection.query($sql.getDailyInfo,[req._id],
                 (err,result)=>{
                 let r = {}
                 if (result!=false){
@@ -36,7 +36,7 @@ module.exports = {
         const query = req.body
         pool.getConnection((err,connection)=>{
             // const params = req.query
-            connection.query($sql.submitOneDailyInfo,[query.description,query.user_id,query.submittime],
+            connection.query($sql.submitOneDailyInfo,[query.description,req._id,query.submittime],
                 (err,result)=>{
                 let r = {}
                 if (result!=false){
