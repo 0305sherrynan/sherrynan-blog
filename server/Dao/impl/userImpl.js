@@ -45,5 +45,62 @@ module.exports = {
 
             })
         })
+    }, 
+    judgeEmailRegisted :(req, res)=>{
+        const query = req.body
+        pool.getConnection((err,connection)=>{
+            // const params = req.query
+            console.log(query)
+            connection.query($sql.judgeEmailRegisted,[query.email],
+                (err,result)=>{
+                let r = {}
+                
+                if (result!=false){
+                  
+                    r = {
+                        code:200,
+                        data:{message:'error'}
+                    }
+                    // return
+                }
+                else {
+                    r = {
+                        code:200,
+                        data:{message:'success'}
+                    }
+                }
+                $utils.closeConnection(res,r,connection)
+
+            })
+        })
+    },
+    
+    registerAccount :(req, res)=>{
+        const query = req.body
+        pool.getConnection((err,connection)=>{
+            // const params = req.query
+            console.log(query)
+            connection.query($sql.registerAccount,[query.user_id,query.email,query.password,query.nickname],
+                (err,result)=>{
+                let r = {}
+                
+                if (result!=false){
+                  
+                    r = {
+                        code:200,
+                        data:{message:'success'}
+                    }
+                    // return
+                }
+                else {
+                    r = {
+                        code:200,
+                        data:{message:'error'}
+                    }
+                }
+                $utils.closeConnection(res,r,connection)
+
+            })
+        })
     },
 }
