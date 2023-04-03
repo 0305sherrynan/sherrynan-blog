@@ -4,6 +4,7 @@ import ElementPlus from 'element-plus'
 import 'element-plus/dist/index.css'
 import './design/index.less'
 import router from './router'
+import  './router/guard'
 
 import Antd from 'ant-design-vue';
 import 'ant-design-vue/dist/antd.css';
