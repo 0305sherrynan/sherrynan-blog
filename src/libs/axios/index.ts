@@ -105,13 +105,18 @@ requestInstance.interceptors.response.use((response)=>{
   if (response.status == 200 || response.status == 204){
     // return Promise.resolve(config)
     const resultData = response.data
-    if (resultData.data.message == 'tokenExpire') {
-      // const route = useRouter()
-      message.error('登录过期！')
-      const storage = new StorageHandler()
-      storage.remove(StorageType.Local,'token')
-      router.push({name:'master'})
+    // 返回的数据的data是个数组，则不需要判断是否报错
+    if ( !(resultData.data instanceof  Array)){
+      console.log(typeof resultData.data)
+      if (resultData.data.message && resultData.data.message == 'tokenExpire') {
+        // const route = useRouter()
+        message.error('登录过期！')
+        const storage = new StorageHandler()
+        storage.remove(StorageType.Local,'token')
+        router.push({name:'master'})
+      }
     }
+
     return response.data
   }else{
     // return Promise.reject(config)
