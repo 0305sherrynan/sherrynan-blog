@@ -22,9 +22,9 @@
                 <!-- <div class="btnLogin"> -->
                     <a-button type="primary" html-type="submit">Submit</a-button>
                     <!-- <span>Log in</span> -->
-                    <div @click="testGetBtn"> test</div>
+                    <!-- <div @click="testGetBtn"> test</div> -->
                 <!-- </div> -->
-                <span class="login-left-lastSpan">Don't have an account?<a @click="goToRegister">Signup</a></span>
+                <span class="login-left-lastSpan">Don't have an account?<a @click="goToRegister">Sign up</a></span>
             </a-form>
         </div>
         <div class="login-right">123</div>
@@ -34,7 +34,7 @@
 <script setup lang="ts">
 import { reactive, onMounted, watch } from 'vue';
 import { useRouter } from 'vue-router';
-import { verifyLoginInfo,testGet } from '@/utils/api/user'
+import { verifyLoginInfo } from '@/utils/api/user'
 import { userApi } from '@/types/api';
 import type { Rule } from 'ant-design-vue/es/form'
 import { da } from 'element-plus/es/locale';
@@ -122,10 +122,7 @@ const validateSuccess = async() =>{
 const validateError = ()=>{
     console.log('error')
 }
-const testGetBtn = async()=>{
-    const data = await testGet()
-    console.log(data)
-}
+
 // const  clickBtn =async ()=>{
 //     const data = await getUserInfo(accountForm)
 //     // console.log(data.data)
