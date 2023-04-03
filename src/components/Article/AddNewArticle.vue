@@ -139,7 +139,9 @@ const submitForm = async()=>{
             font-size: 20px;
             color: black;
             line-height: 20px;
-
+            &:hover{
+                cursor: pointer;
+            }
             >img {
                 width: 140px;
                 height: 140px;
