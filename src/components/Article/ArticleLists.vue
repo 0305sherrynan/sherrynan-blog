@@ -45,7 +45,9 @@ const goToArticleDetail = (article_id:string)=>{
         width: 810px;
         // height: 200px;
         margin-right: 40px;
-        
+        display: flex;
+        flex-direction: column-reverse;
+
         >* {
             box-shadow: rgba(0, 0, 0, 0.1) 0px 1px 8px 0px;
             margin-top: 30px;
