@@ -6,7 +6,7 @@ module.exports =  class jwtUtil {
     //签名，生成token
     static sign(data){
         return jwt.sign(data,secretkey,{
-            expiresIn: 20
+            expiresIn: 60*60
         })
     }
 
@@ -42,14 +42,10 @@ module.exports =  class jwtUtil {
                 // next()
                 // return
             }else{
-                // console.log('error')
+                //验证通过，将带有身份认证的id（实际为登录的user_id） 赋值给req，
+                //则请求时不需要自己携带user_id
                 req._id = data._id
-                // res.json({
-                //     code:200,
-                //     data:{
-                //         message:'token正确'
-                //     }
-                // })
+
                 next()
             }
             // next()
