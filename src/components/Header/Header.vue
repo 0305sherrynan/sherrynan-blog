@@ -8,7 +8,7 @@
                     <el-menu mode="horizontal" class="right-box">
                         <el-menu-item><router-link :to="{name:'master'}">首页</router-link><span></span></el-menu-item>
                         <el-menu-item><router-link :to="{name:'daily'}">日常RECORD</router-link></el-menu-item>
-                        <el-menu-item><router-link :to="{name:'admin'}">ADMIN</router-link></el-menu-item>
+                        <el-menu-item><router-link :to="{name:'admin'}" target="_blank">ADMIN</router-link></el-menu-item>
                         <el-menu-item><router-link :to="{name:'article'}">文章</router-link></el-menu-item>           
                         <el-menu-item>关于作者</el-menu-item>
 
@@ -16,7 +16,7 @@
                             <template #title>
                                 <img :src="returnImg('brian.png')" class="personal-img" alt="">
                             </template>
-                            <el-menu-item>登录</el-menu-item>
+                            <el-menu-item><router-link :to="{name:'entrance',params:{operate:'login'}}" >登录</router-link></el-menu-item>
                             <el-menu-item>个人中心</el-menu-item>
                             <el-menu-item>前往后台</el-menu-item>
                             <!-- <el-menu-item></el-menu-item> -->
@@ -43,13 +43,13 @@ import { returnImg } from '@/utils/img/imgInVite'
     justify-content: space-between;
 }
 //定义hover时候的动画
-/deep/.el-sub-menu__title:hover{
+:deep(.el-sub-menu__title:hover){
     background-color: transparent !important;
 }
 
 
 .right-box{
-    /deep/.el-menu-item {
+    :deep(.el-menu-item) {
     &:hover{
         background-color: transparent ;
         color: #88add3 !important;
