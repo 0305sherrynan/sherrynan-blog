@@ -1,4 +1,7 @@
+import { message } from "ant-design-vue";
 import { StorageHandler,  StorageType} from "../storage";
+// import {useRouter} from 'vue-router'
+import router from "@/router"
 // import message from "../zwzUI/message";
 // import {useUserStore} from '@/store/user'
 // import router from "@/router";
@@ -87,9 +90,13 @@ export const requestInstance = axios.create({
  */
 requestInstance.interceptors.request.use((config)=>{
   //查看token
-  // if (StorageHandler.getItem(StorageType.Local,'token')){
-  //   config.headers.Authorization = StorageHandler.getItem(StorageType.Local,'token')
-  // }
+  // console.log(12312312321)
+  const storage = new StorageHandler()
+  // console.log(config.headers.Authorization)
+  if (storage.getItem(StorageType.Local,'token')){
+    config.headers.Authorization ='Bearer ' + JSON.parse(localStorage.getItem('token') as string)
+    console.log(config.headers.Authorization)
+  }
   return config
 },(err)=>{
   return Promise.reject(err)
@@ -97,7 +104,15 @@ requestInstance.interceptors.request.use((config)=>{
 requestInstance.interceptors.response.use((response)=>{
   if (response.status == 200 || response.status == 204){
     // return Promise.resolve(config)
-    return response.data.result
+    const resultData = response.data
+    if (resultData.data.message == 'tokenExpire') {
+      // const route = useRouter()
+      message.error('登录过期！')
+      const storage = new StorageHandler()
+      storage.remove(StorageType.Local,'token')
+      router.push({name:'master'})
+    }
+    return response.data
   }else{
     // return Promise.reject(config)
   }
