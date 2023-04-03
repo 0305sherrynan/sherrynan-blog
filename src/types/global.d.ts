@@ -26,3 +26,17 @@ declare namespace Article{
     }
 }
 declare function  returnArticle_all():articleApi.getRequestResponse<Article.Article_all>
+
+declare namespace User{
+    interface verify_login_user{
+        email:string
+        password:string
+    }
+
+    interface verify_register_user{
+        email:string
+        nickname:string
+        password:string
+        user_id:string
+    }
+}
