@@ -8,7 +8,7 @@ import {articleApi} from '#/api'
  * getArticleByArticleid 获取article_id的文章
  */
 export const  getArticleInfo = ()=>{
-    return requestInstance.get<any,articleApi.getRequestResponse<Article.Article_all>>("zwz/api/article")
+    return requestInstance.get<any,articleApi.getRequestResponse<Article.Article_all> | articleApi.postRequestResponse<{message:string}>>("zwz/api/article")
 }
 export const getArticleInfoBySort = (sortName:string)=>{
     return requestInstance.get<any,articleApi.getRequestResponse<Article.Article_all>>(`zwz/api/article/sort/${sortName}`)
@@ -17,7 +17,7 @@ export const submitOneArticleInfo = (data:Article.article_Exclude_userid)=>{
     return requestInstance.post<any,articleApi.postRequestResponse<{message:string}>>("zwz/api/article",data)
 }
 export const getArticleSortAndNumber = ()=>{
-    return requestInstance.get<any,articleApi.getRequestResponse<Article.article_sort>>("zwz/api/article/sort")
+    return requestInstance.get<any,articleApi.getRequestResponse<Article.article_sort> | articleApi.postRequestResponse<{message:string}>>("zwz/api/article/sort")
 }
 export const getArticleByArticleid = (article_id:string)=>{
     return requestInstance.get<any,articleApi.getRequestResponse<Article.Article_all>>(`zwz/api/article/${article_id}`)
