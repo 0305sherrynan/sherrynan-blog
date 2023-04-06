@@ -4,3 +4,6 @@ export const returnImg = (item:string)=>{
 export const returnIcon = (item:string)=>{
     return new URL(`/src/assets/icon/${item}`, import.meta.url).href
 }
+export const returnDBImg = (item:string)=>{
+    return new URL(`/src/assets/db/${item}`, import.meta.url).href
+}
