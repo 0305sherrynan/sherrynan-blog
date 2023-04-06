@@ -39,4 +39,10 @@ declare namespace User{
         password:string
         user_id:string
     }
+    interface get_personal_info{
+        nickname:string
+        email:string
+        password:string
+        coverimg:string | null
+    }
 }
