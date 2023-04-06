@@ -35,6 +35,16 @@
                     <a-menu-item key="6"><router-link :to="{name:'AddArticle'}">文章增加</router-link></a-menu-item>
                     <a-menu-item key="8">Team 2</a-menu-item>
                 </a-sub-menu>
+                <a-sub-menu key="sub3">
+                    <template #title>
+                        <span>
+                            <team-outlined />
+                            <span>信息修改</span>
+                        </span>
+                    </template>
+                    <Suspense><a-menu-item key="10"><router-link :to="{name:'personMiddle'}">个人信息</router-link></a-menu-item></Suspense>
+                    <!-- <a-menu-item key="8">Team 2</a-menu-item> -->
+                </a-sub-menu>
                 <a-menu-item key="9">
                     <file-outlined />
                     <span>File</span>
