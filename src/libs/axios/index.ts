@@ -1,15 +1,7 @@
 import { message } from "ant-design-vue";
 import { StorageHandler,  StorageType} from "../storage";
-// import {useRouter} from 'vue-router'
 import router from "@/router"
-// import message from "../zwzUI/message";
-// import {useUserStore} from '@/store/user'
-// import router from "@/router";
 import axios from "axios";
-// import { config } from "process";
-
-
-// const store  = useUserStore()
 /**
  * 不同报错的回应
  * @param status 
@@ -89,13 +81,10 @@ export const requestInstance = axios.create({
  * 声明responseInterceptor和requestInterceptor
  */
 requestInstance.interceptors.request.use((config)=>{
-  //查看token
-  // console.log(12312312321)
   const storage = new StorageHandler()
-  // console.log(config.headers.Authorization)
+  //若存在token，则请求头带上token
   if (storage.getItem(StorageType.Local,'token')){
     config.headers.Authorization ='Bearer ' + JSON.parse(localStorage.getItem('token') as string)
-    console.log(config.headers.Authorization)
   }
   return config
 },(err)=>{
@@ -103,25 +92,21 @@ requestInstance.interceptors.request.use((config)=>{
 })
 requestInstance.interceptors.response.use((response)=>{
   if (response.status == 200 || response.status == 204){
-    // return Promise.resolve(config)
     const resultData = response.data
     // 返回的数据的data是个数组，则不需要判断是否报错
     if ( !(resultData.data instanceof  Array)){
-      console.log(typeof resultData.data)
+      //报错信息里提示为token过期，则跳转登录页
       if (resultData.data.message && resultData.data.message == 'tokenExpire') {
-        // const route = useRouter()
         message.error('登录过期！')
         const storage = new StorageHandler()
         storage.remove(StorageType.Local,'token')
         router.push({name:'master'})
       }
     }
-
     return response.data
-  }else{
-    // return Promise.reject(config)
   }
 },(err)=>{
+  console.log(err)
   // const {response} = err
   // errorHandle(response.status,response.data.message)
 })
