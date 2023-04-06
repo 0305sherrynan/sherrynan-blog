@@ -14,6 +14,11 @@
 <script setup lang="ts">
 import { reactive, watch } from 'vue';
 import { useRouter } from 'vue-router';
+/**
+ * data
+ * props 
+ * userArticleLists 渲染到DOM的数据，后续可能会因为父组件传来信息而更新
+ */
 const route = useRouter()
 const props = defineProps<{
     userArticleLists: Array<Article.Article_all>,
@@ -21,12 +26,13 @@ const props = defineProps<{
 }>()
 let userArticleLists = reactive<Array<Article.Article_all>>([])
 
-userArticleLists = props.userArticleLists
+
 
 /**
  * operate
  * 当父组件完成数据更新后，告知该组件，也该更新数据
  */
+ userArticleLists = props.userArticleLists
 watch(()=>props.routeChange,(newVal, oldVal)=>{
     userArticleLists = props.userArticleLists
           console.dir(userArticleLists)
