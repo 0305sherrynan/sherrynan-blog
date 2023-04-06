@@ -27,6 +27,15 @@ module.exports = {
                         data:result
                     }
                 }
+                else{
+                    r = {
+                        code:200,
+                        data:{
+                            message:'暂无数据，请前往admin添加吧！'
+                        }
+                    }
+                }
+                console.log(r)
                 $utils.closeConnection(res,r,connection)
 
             })
@@ -66,6 +75,14 @@ module.exports = {
                         data:result
                     }
                 }
+                else{
+                    r = {
+                        code:200,
+                        data:{
+                            message:'暂无数据，请前往admin添加吧！'
+                        }
+                    }
+                }
                 $utils.closeConnection(res,r,connection)
 
             })
@@ -78,10 +95,17 @@ module.exports = {
                 (err,result)=>{
                 let r = {}
                 if (result!=false){
-                    console.log(result)
                     r = {
                         code:200,
                         data:result
+                    }
+                }
+                else{
+                    r = {
+                        code:200,
+                        data:{
+                            message:'暂无数据，请前往admin添加吧！'
+                        }
                     }
                 }
                 $utils.closeConnection(res,r,connection)
