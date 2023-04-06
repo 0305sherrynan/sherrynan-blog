@@ -16,9 +16,6 @@ import Banner from '@/components/Banner/Banner.vue';
 </script>
 
 <style scoped lang="less">
-// .root{
-//     width: 100px;
-// }
 .wrap{
     position: relative;
     z-index: 10;
@@ -26,7 +23,6 @@ import Banner from '@/components/Banner/Banner.vue';
     &::after{
         content: '';
         position: absolute;
-        // top: 50vh;
         width: 5px;
         height: 100%;
         background-color: rgb(204, 204, 204);
@@ -38,6 +34,7 @@ import Banner from '@/components/Banner/Banner.vue';
     width: 100%;
     height: 100%;
     background-repeat: no-repeat;
-    background-size: 100% 100%;
+    background-size: 100% 100vh;
+    background-repeat: repeat;
 }
 </style>
