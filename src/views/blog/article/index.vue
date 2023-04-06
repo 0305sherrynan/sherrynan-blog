@@ -1,18 +1,10 @@
 <template>
     <div>
         <Banner></Banner>
-        <div class="articlelist-box">
+        <div class="articlelist-box" v-if="isExistData">
             <article-lists :user-article-lists="userArticleLists"></article-lists>
             <div class="right-info">
-                <div class="Categories">
-                    <div>
-                    <appstore-outlined /><span class="categories-title">Categories</span>
-                    </div>
-                    <div v-for="(item, index) in sortAndNumber" :key="index" class="categories-info" @click="goToSpecialSortList(item.sortName)"> 
-                        <span class="sort-text">{{ item.sortName }}</span>
-                        <div class="sort-count">{{ item.sortCount }}</div>
-                    </div> 
-                </div>
+                <article-category :sort-and-number="sortAndNumber"></article-category>
             </div>
         </div>
     </div>
@@ -21,36 +13,51 @@
 <script setup lang="ts">
 import Banner from '@/components/Banner/Banner.vue';
 import { getArticleInfo, getArticleSortAndNumber } from '@/utils/api/article'
-import { articleApi } from '#/api'
-import { useRouter } from 'vue-router';
+
 import ArticleLists from "@/components/Article/ArticleLists.vue";
+import ArticleCategory from '@/components/Article/ArticleCategory.vue';
 
-import {
-    UserOutlined,
-    TagOutlined,
-    ClockCircleOutlined,
-    AppstoreOutlined
-
-} from '@ant-design/icons-vue';
-//需要获取到对应user_id的所有article数据
+import { ref } from 'vue';
 /**
- * userArticleLists 用户数据获取 
- * sortAndNumber 获取用户文章分类后的类别和对应数量
+ * getData 用户数据获取 ： 可能不符合条件
+ * userArticleLists 用户数据获取  ：最终符合条件
+ * dataUnionType   userArticleLists 的可能类型
+ * getDataSort 获取用户文章分类后的类别和对应数量  ： 可能不符合条件
+ * sortAndNumber 获取用户文章分类后的类别和对应数量  ：最终符合条件
  * route 使用路由
+ * isExistData 用户是否有文章
+
  */
 
-const { data: userArticleLists } = await getArticleInfo()
-const { data: sortAndNumber } = await getArticleSortAndNumber()
-const route = useRouter()
+const { data: getData } = await getArticleInfo()
+let userArticleLists: Article.Article_all[] = []
+type dataUnionType = Article.Article_all | { message: string }
+const { data: getDataSort } = await getArticleSortAndNumber()
+let sortAndNumber: Article.article_sort[] = []
+const isExistData = ref<boolean>(false)
+
 /**
  * methods
  * goToArticleDetail 实现路由跳转至文章详情 携带参数query
  * goToSpecialSortList 跳转到特殊分类的文章列表
+ * DataTypeJudge 判断数据是否有，没有的话是返回message
  */
 
-const goToSpecialSortList = (sortName:string)=>{
-    route.push({name:'category',query:{sortName}})
+
+const DataTypeJudge = (data: unknown): data is { message: string } => {
+    return (data as { message: string }).message == undefined
 }
+/**
+ * operate 
+ * 判断是否有内容从而展示不同的内容
+ */
+isExistData.value = DataTypeJudge(getData)
+if (isExistData.value == true) {
+    userArticleLists = getData as Article.Article_all[]
+    sortAndNumber = getDataSort as Article.article_sort[]
+}
+
+
 </script>
 
 <style scoped lang="less">
@@ -59,9 +66,6 @@ const goToSpecialSortList = (sortName:string)=>{
     display: flex;
     flex-direction: row;
     justify-content: center;
-    // margin-top: 50px;
-    // overflow: auto;
-    // margin-bottom: 50px;
     padding: 50px;
 
     >* {
@@ -78,44 +82,7 @@ const goToSpecialSortList = (sortName:string)=>{
         padding: 10px;
         box-shadow: rgba(0, 0, 0, 0.1) 0px 1px 8px 0px;
 
-        .Categories {
-            // border: 1px solid #e8e8e8;
-            // border-radius: 6px;
 
-            .categories-title {
-                margin-left: 10px;
-                font-weight: 500;
-                font-size: 17px;
-            }
-
-            .categories-info {
-                margin-top: 15px;
-                display: flex;
-                flex-direction: row;
-                justify-content: space-between;
-               padding: 7px;
-                align-items: center;
-                border: 1px solid #e8e8e8;
-                border-radius: 6px;
-                &:hover{
-                    cursor: pointer;
-                }   
-
-                .sort-text {
-                    font-size: 20px;
-                }
-
-                .sort-count {
-                    width: 25px;
-                    height: 25px;
-                    color: white;
-                    background-color: #bb7205;
-                    border-radius: 15%;
-                    text-align: center;
-
-                }
-            }
-
-        }
     }
-}</style>
+}
+</style>
