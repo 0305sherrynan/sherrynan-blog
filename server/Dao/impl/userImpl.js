@@ -13,6 +13,8 @@ module.exports = {
      * 实现接口
      * verifyLoginInfo 验证登录信息
      * modifyPasInfo 修改个人密码
+     * judgeEmailRegisted 验证是否该账号无人注册
+     * registerAccount 注册账号
      *
      */ 
 
@@ -79,9 +81,8 @@ module.exports = {
     registerAccount :(req, res)=>{
         const query = req.body
         pool.getConnection((err,connection)=>{
-            // const params = req.query
             console.log(query)
-            connection.query($sql.registerAccount,[query.user_id,query.email,query.password,query.nickname],
+            connection.query($sql.registerAccount,[query.user_id,query.email,query.password,query.nickname,query.coverimg],
                 (err,result)=>{
                 let r = {}
                 
