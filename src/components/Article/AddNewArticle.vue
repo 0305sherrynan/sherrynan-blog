@@ -101,20 +101,15 @@ const submitForm = async()=>{
     reader.readAsDataURL(upLoadFile.value);
     }
     reader.addEventListener("load", function () {
-        // IMGUrl = reader.result
          const cover = reader.result?.toString().replace(/^data:image\/\w+;base64,/, '')
          formData.cover = cover as string
          console.log(cover)
   }, false);
     const  infoHTML =  xss.process(VueMarkdownEditor.vMdParser.themeConfig.markdownParser.render(formData.info))
-    // formData.info =infoHTML
     console.log(formData,infoHTML)
     const data = await submitOneArticleInfo(Object.assign(formData,{info:infoHTML,article_id:randomId(-10)}))
-    // console.log(data)
     //重置表单
     resetFormdata()
-    console.log(formData)
-    // console.log(data)
 }
 </script>
 
@@ -130,12 +125,9 @@ const submitForm = async()=>{
 
         .left-cover {
             display: flex;
-            // text-align: center;
             justify-content: center;
             align-items: center;
-            // align-content: center;
             width: 30%;
-            // background-color: blue;
             font-size: 20px;
             color: black;
             line-height: 20px;
@@ -150,7 +142,6 @@ const submitForm = async()=>{
 
         .right-form {
             width: 70%;
-            // background-color: red;
 
         }
     }
