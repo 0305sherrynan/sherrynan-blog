@@ -77,6 +77,11 @@ const routes: RouteRecordRaw[] = [
                 path:'AddArticle',
                 name:'AddArticle',
                 component:() => import('@/components/Article/AddNewArticle.vue')
+            },
+            {
+                path:'personMiddle',
+                name:'personMiddle',
+                component:() => import('@/views/admin/components/person/index.vue')
             }
          ]
     }
