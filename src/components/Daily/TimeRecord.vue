@@ -18,9 +18,7 @@
 
 <script setup lang="ts">
 import CardContent from './CardContent.vue';
-import {getDailyInfo} from '@/utils/api/daily'
-//假设 获取到数据 data
-let data = [1,2,3,4,5]
+import { getDailyInfo } from '@/utils/api/daily'
 /**
  * data
  * leftOrRight 判断是左边该出现还是右边
@@ -31,36 +29,33 @@ console.log(dailyLists)
 
 <style scoped lang="less">
 .root {
-    // background-color: red;
     margin: 0 auto;
     width: 1000px;
     display: flex;
     flex-direction: column-reverse;
-    // justify-items: center;
     align-items: center;
 }
 
 .row-box {
     position: relative;
-    &:last-child{
+
+    &:last-child {
         margin-top: 60px;
     }
-    // display: flex;
-    // justify-content: space-evenly;
-    >div:not(.center-box) {
 
+    >div:not(.center-box) {
         width: 400px;
-        // height: 100%;
-        background-color:#4a5a5f;
+        background-color: #4a5a5f;
     }
+
     .left-box {
         border-radius: 9px;
         padding: 20px;
         float: left;
         position: relative;
+
         &::after {
             display: block;
-            /* top: 0; */
             position: absolute;
             width: 0;
             height: 0;
@@ -68,7 +63,6 @@ console.log(dailyLists)
             top: 7px;
             content: '';
             border-left: 10px solid #4a5a5f;
-            /* border-right: 10px solid pink; */
             border-top: 10px solid transparent;
             border-bottom: 10px solid transparent;
         }
@@ -80,31 +74,25 @@ console.log(dailyLists)
         padding: 20px;
         float: right;
         position: relative;
+
         &::after {
             display: block;
-            /* top: 0; */
             position: absolute;
             width: 0;
             height: 0;
             left: -10px;
             top: 7px;
             content: '';
-            border-right: 10px solid  #4a5a5f;
-            /* border-right: 10px solid pink; */
+            border-right: 10px solid #4a5a5f;
             border-top: 10px solid transparent;
             border-bottom: 10px solid transparent;
         }
-        // .card-content{
 
-        // }
     }
 
     .center-box {
-        // width: 20px;
         height: 100%;
-        // background-color: pink;
         position: absolute;
-        // top: 50%;
         left: 50%;
         transform: translateX(-50%);
 
@@ -118,5 +106,4 @@ console.log(dailyLists)
         }
     }
 
-}
-</style>
+}</style>

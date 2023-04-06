@@ -15,7 +15,8 @@
                     </div>
                     <div>
                         <span>Password</span>
-                        <a-form-item name="password" has-feedback ref="formRef"><a-input v-model:value="registerForm.password" type=""
+                        <a-form-item name="password" has-feedback ref="formRef"><a-input
+                                v-model:value="registerForm.password" type=""
                                 placeholder="请输入最大长度为30的密码"></a-input></a-form-item>
 
                     </div>
@@ -25,11 +26,8 @@
                                 placeholder="请输入最大长度为30的密码"></a-input></a-form-item>
 
                     </div>
-                    <!-- <div class="btnLogin"> -->
                     <a-button type="primary" html-type="submit">Sign Up</a-button>
-                    <!-- <span>Log in</span> -->
-                    <!-- <div @click="testGetBtn"> test</div> -->
-                    <!-- </div> -->
+
                     <span class="login-left-lastSpan">Does exist the account? <a @click="goToRLogin">Sign in</a></span>
                 </a-form>
             </div>
@@ -39,13 +37,13 @@
 </template>
 
 <script setup lang="ts">
-import { reactive, onMounted,ref } from 'vue';
+import { reactive, onMounted, ref } from 'vue';
 
 import { useRouter } from 'vue-router'
 import type { Rule } from 'ant-design-vue/es/form'
 import { judgeEmailRegisted, registerAccount } from '@/utils/api/user'
 import { message } from 'ant-design-vue';
-import {randomId} from '@/utils/random/randomId'
+import { randomId } from '@/utils/random/randomId'
 /**
  * 数据
  * formRef
@@ -103,65 +101,38 @@ const rules: Record<string, Rule[]> = {
     password: [{ validator: validatePass2, trigger: 'change' }],
     nickname: [{ validator: validatePass3, trigger: 'change' }],
 };
-// const userStore = useUserStore()
 /**
  * 方法
+ * goToRLogin 跳转到login
  * validateSuccess 验证成功的回调
  */
-const goToRLogin = () => {
-    route.push({
+const goToRLogin = async () => {
+    await route.push({
         name: "entrance",
         params: {
             operate: 'login'
         }
     })
-    emit('clickSignUp')
+    await emit('clickSignUp')
 }
 const validateSuccess = async () => {
     console.log(registerForm)
     const { data: data } = await judgeEmailRegisted(registerForm.email)
-    if (data.message == 'error'){
+    if (data.message == 'error') {
         message.warning('该邮箱已被注册！')
         formRef.value?.resetFields()
     }
     else {
-        const { data: data } = await registerAccount(Object.assign(registerForm,{user_id:randomId(8)}))
+        const { data: data } = await registerAccount(Object.assign(registerForm, { user_id: randomId(8), coverimg: '' }))
         if (data.message == 'success') {
             message.success('成功注册')
-            route.push({
-                name: "entrance",
-                params: {
-                    operate: 'register'
-                }
-            })
-            emit('clickSignUp')
+            goToRLogin()
         }
     }
-    // console.log(data)
 }
 const validateError = () => {
 
 }
-// const  clickBtn =async ()=>{
-//     const data = await registerAccount(registerForm)
-//     console.log(data)
-//     if (data.code == true) {
-//         Message.success('注册成功！即将前往登录页面')
-//         // const reallyObj = data.data
-//         // const
-//         //pinia设置user
-//         // userStore.$patch({
-//         //     user:data.data
-//         // })
-//         router.push('/login')
-//     }else{
-//         Message.error('注册失败！检查是否已经注册')
-//     }
-// }
-
-// onMounted(()=>{
-//     console.log(getUserInfo(accountForm))
-// })
 </script>
 
 <style scoped lang="less">
@@ -170,16 +141,7 @@ div:has(.login) {
 }
 
 .login {
-    // width: 1000px;
     visibility: visible;
-    // display: inline-block;
-    // height: 100vh;
-    // background-color: red;
-    // border: 1px solid rgb(0,0,0);
-    // background-image: url('@/assets/img/R-C.jpg');
-    // background-size: 100vw 100vh;
-
-    // border-radius: 10px;
     margin: 0 auto;
 
     >* {
@@ -193,9 +155,7 @@ div:has(.login) {
 
         visibility: visible;
         width: 500px;
-        // background-color: rgb(255, 255, 255);
         border-radius: 15px;
-        // height: 100%;
         border: 1px solid #f6f4f4;
 
         >.login-left-title {
@@ -237,7 +197,6 @@ div:has(.login) {
             >.btnLogin {
                 width: 424px;
                 height: 49px;
-                // border: 2px solid #e6e6e6;
                 border-radius: 34px;
                 background-color: #c3c3c3;
                 margin: 0 auto;
@@ -245,7 +204,6 @@ div:has(.login) {
                 padding: 0;
 
                 &:hover {
-                    // background-color: blue;
                     background-color: #E5AA70;
                     cursor: pointer;
                 }
@@ -255,7 +213,6 @@ div:has(.login) {
                     top: 50%;
                     text-align: center;
                     transform: translateY(-50%);
-                    /* vertical-align: middle; */
                     font-size: 19px;
                     color: rgb(255, 255, 255);
                 }

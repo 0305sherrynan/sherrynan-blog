@@ -52,19 +52,16 @@ const scrollToMaster = ()=>{
     width: 100%;
     //沾满全屏
     height: 100vh;
-    // overflow: hidden;
 }
 .wave{
    
 .arrow{
     z-index: 999;
     position: absolute;
-    // top: 50%;
     bottom: 2%;
     left: 50%;
     transform: translate(-50%,-50%);
     &:hover{
-        // background-color: red;
         cursor: pointer;
     }
 }

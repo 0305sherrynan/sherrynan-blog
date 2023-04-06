@@ -19,12 +19,7 @@
 <script lang="ts" setup>
 import { ref ,watch} from 'vue'
 import {submitOneDailyInfo} from '@/utils/api/daily'
-// import { da } from 'element-plus/es/locale';
 import VueMarkdownEditor, { xss } from '@kangc/v-md-editor';
-
-// 调用方法将 markdown 转换成 html 并使用 xss 过滤
-
-
 
 /**
  * data
@@ -32,10 +27,6 @@ import VueMarkdownEditor, { xss } from '@kangc/v-md-editor';
  */
 let text = ref<string>('')
 const submitTime = ref<string>('')
-// const formData :Daily.Daily_Exclude_id = 
-// watch(text,(newValue,oldValue)=>{
-//     console.log(newValue,oldValue)
-// })
 
 /**
  * method  

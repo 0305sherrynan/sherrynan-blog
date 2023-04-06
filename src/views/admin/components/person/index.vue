@@ -242,12 +242,9 @@ const submitFormpas = async() => {
 
     .left-cover {
         display: flex;
-        // text-align: center;
         justify-content: center;
         align-items: center;
-        // align-content: center;
         width: 30%;
-        // background-color: blue;
         font-size: 20px;
         color: black;
         line-height: 20px;
@@ -266,7 +263,6 @@ const submitFormpas = async() => {
         width: 30%;
         display: flex;
         align-items: center;
-        // background-color: red;
 
     }
     .basic-btn{

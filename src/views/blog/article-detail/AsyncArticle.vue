@@ -1,5 +1,5 @@
 <template>
-  <!-- <span v-html=""></span> -->
+
   <div class="left-article">
     <v-md-preview-html :html="articleDetails[0].info" preview-class="github-markdown-body"
       ref="preview"></v-md-preview-html>
@@ -50,8 +50,6 @@ const scrollHandler = ()=>{
 }
 watch(nowScrollPos,(newval,oldval)=>{
   isScollEnough.value=true
-  // if (newval>500) isScollEnough.value = true
-  // else isScollEnough.value = false
 })
 /**
  * 侧边栏
@@ -130,7 +128,6 @@ const handleAnchorClick = (anchor: any) => {
 .isFix{
   position: sticky;
   top:30px;
-  // right: 10px;
 
 }
 </style>

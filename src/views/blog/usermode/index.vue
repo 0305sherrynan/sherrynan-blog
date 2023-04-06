@@ -23,21 +23,13 @@ const route = useRouter()
 const operateFace = ref(route.currentRoute.value.params.operate)
 /**
  * method 
- * changeOperateFace
+ * changeOperateFace 子组件 emit的回调函数
  */
-// watch(()=>route.currentRoute.value.params.operate,(newVal:string,oldVal)=>{
-//     operateFace.value = newVal
-// })
-// watch(operateFace,(newVal,oldVal)=>{
-//     route.currentRoute.value.params.operate = newVal
-// })
 const changeOperateFace = ()=>{
     if (operateFace.value == 'login')  operateFace.value   = 'register'
     else    operateFace.value  = 'login'
-    console.log(operateFace.value)
-    // operateFace.value = 'register'
+
 }
-console.log(operateFace.value)
 </script>
 
  <style scoped lang="less">
@@ -47,9 +39,6 @@ console.log(operateFace.value)
     position: relative;
     background-image: url('@/assets/img/R-C.jpg');
     background-size: 100vw 100vh;
-    // display: flex;
-    // justify-content: center;
-    // align-items: center;
     >*{
         position: absolute;
         top: 50%;

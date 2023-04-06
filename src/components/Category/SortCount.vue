@@ -63,12 +63,6 @@ const emits = defineEmits(['clickSort'])
         &:hover{
             cursor: pointer;
         }
-        // &:active{
-        //     background-color: pink;
-        // }
-        // [key]{
-        //     background-color: pink;
-        // }
         >div {
             width: 25px;
             height: 25px;

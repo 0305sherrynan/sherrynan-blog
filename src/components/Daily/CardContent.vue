@@ -11,7 +11,6 @@
 
 <script setup lang="ts">
 import {formatDateTime} from '@/utils/time/index'
-//获取daily信息 
 
 /**
  * data
@@ -25,7 +24,6 @@ console.log(formatDateTime(props.dailyLists.submittime))
 /**
  * operate
  */
-// const  data =  await getDailyInfo()
 </script>
 
 <style scoped lang="less">

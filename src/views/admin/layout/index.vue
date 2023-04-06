@@ -73,13 +73,11 @@
 </template>
 <script lang="ts" setup>
 import {
-    PieChartOutlined,
-    DesktopOutlined,
     UserOutlined,
     TeamOutlined,
     FileOutlined,
 } from '@ant-design/icons-vue';
-import { defineComponent, ref } from 'vue';
+import { ref } from 'vue';
 const collapsed = ref<boolean>(false)
 const selectedKeys = ref<string[]>(['1'])
 

@@ -1,13 +1,12 @@
 <template>
-    
     <div class="login">
         <div class="login-left">
             <section class="login-left-title">
                 <h2>Welcome Login</h2>
                 <p>We're so excited to see you again!</p>
             </section>
-            <a-form class="form"  :model="userForm" :rules="rules" ref="formRef" name="custom-validation"
-            @finish="validateSuccess" @finishFailed="validateError">
+            <a-form class="form" :model="userForm" :rules="rules" ref="formRef" name="custom-validation"
+                @finish="validateSuccess" @finishFailed="validateError">
                 <div>
                     <span>Email or phone number</span>
                     <a-form-item name="email" has-feedback><a-input v-model:value="userForm.email" type="text"
@@ -19,11 +18,7 @@
                             placeholder="请输入最大长度为30的密码"></a-input></a-form-item>
                     <a href="">Forget your password</a>
                 </div>
-                <!-- <div class="btnLogin"> -->
-                    <a-button type="primary" html-type="submit">Submit</a-button>
-                    <!-- <span>Log in</span> -->
-                    <!-- <div @click="testGetBtn"> test</div> -->
-                <!-- </div> -->
+                <a-button type="primary" html-type="submit">Submit</a-button>
                 <span class="login-left-lastSpan">Don't have an account?<a @click="goToRegister">Sign up</a></span>
             </a-form>
         </div>
@@ -39,7 +34,7 @@ import { userApi } from '@/types/api';
 import type { Rule } from 'ant-design-vue/es/form'
 import { da } from 'element-plus/es/locale';
 import { message } from 'ant-design-vue';
-import {StorageHandler,StorageType} from '@/libs/storage'
+import { StorageHandler, StorageType } from '@/libs/storage'
 
 /**
  * 数据
@@ -58,7 +53,7 @@ const userForm = reactive<User.verify_login_user>({
     email: '',
     password: ''
 })
-watch(()=>userForm,(newo,od)=>{
+watch(() => userForm, (newo, od) => {
     console.log(newo)
 })
 let validatePass = async (_rule: Rule, value: string) => {
@@ -104,46 +99,24 @@ const goToRegister = () => {
     emit('clickSignUp')
 }
 
-const validateSuccess = async() =>{
+const validateSuccess = async () => {
 
-    const {data:data} = await verifyLoginInfo(userForm)
+    const { data: data } = await verifyLoginInfo(userForm)
     // const result = data.data
     // console.log(data)
     if (data.message == 'error') message.error('账号或者密码错误！')
-    else{
+    else {
         message.success('验证成功')
-        storage.setItem(StorageType.Local,'token',data.token)
+        storage.setItem(StorageType.Local, 'token', data.token)
         route.push({
-            name:'master'
+            name: 'master'
         })
     }
-    
+
 }
-const validateError = ()=>{
+const validateError = () => {
     console.log('error')
 }
-
-// const  clickBtn =async ()=>{
-//     const data = await getUserInfo(accountForm)
-//     // console.log(data.data)
-//     if (data.code == true) {
-//         Message.success('登录成功，即将跳转')
-//         //pinia设置user
-//         userStore.$patch({
-//             user:data.data
-//         })
-//         //token 存入本地
-//         await userStore.saveUserInfo(userStore.user)
-//         storageHandler.setItem(StorageType.Local,'token',userStore.user.token)
-//         router.push('/')
-//     }else{
-//         Message.error('账号或密码错误')
-//     }
-// }
-
-// onMounted(()=>{
-//     console.log(getUserInfo(accountForm))
-// })
 </script>
 
 <style scoped lang="less">
@@ -152,16 +125,8 @@ div:has(.login) {
 }
 
 .login {
-    // width: 1000px;
     visibility: visible;
-    // display: inline-block;
-    // height: 100vh;
-    // background-color: red;
-    // border: 1px solid rgb(0,0,0);
-    // background-image: url('@/assets/img/R-C.jpg');
-    // background-size: 100vw 100vh;
 
-    // border-radius: 10px;
     margin: 0 auto;
 
     >* {
@@ -175,9 +140,8 @@ div:has(.login) {
 
         visibility: visible;
         width: 500px;
-        // background-color: rgb(255, 255, 255);
         border-radius: 15px;
-        // height: 100%;
+
         border: 1px solid #f6f4f4;
 
         >.login-left-title {
@@ -219,7 +183,6 @@ div:has(.login) {
             >.btnLogin {
                 width: 424px;
                 height: 49px;
-                // border: 2px solid #e6e6e6;
                 border-radius: 34px;
                 background-color: #c3c3c3;
                 margin: 0 auto;
@@ -227,7 +190,6 @@ div:has(.login) {
                 padding: 0;
 
                 &:hover {
-                    // background-color: blue;
                     background-color: #E5AA70;
                     cursor: pointer;
                 }
@@ -237,7 +199,6 @@ div:has(.login) {
                     top: 50%;
                     text-align: center;
                     transform: translateY(-50%);
-                    /* vertical-align: middle; */
                     font-size: 19px;
                     color: rgb(255, 255, 255);
                 }

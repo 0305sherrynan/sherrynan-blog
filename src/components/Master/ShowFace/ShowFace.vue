@@ -42,7 +42,7 @@ import { returnImg, returnIcon } from '@/utils/img/imgInVite';
     // 使用传统盒子模型 让padding算入width 不用自行计算width-content=padding了
     box-sizing: border-box;
     padding: 55px;
-    // overflow: hidden;
+
     width: 100%;
     height: 1000px;
     background-color: white;
@@ -80,7 +80,6 @@ import { returnImg, returnIcon } from '@/utils/img/imgInVite';
                 justify-content: space-evenly;
 
                 >div {
-                    // background-color: red;
                     text-align: center;
 
                     span {
@@ -97,11 +96,10 @@ import { returnImg, returnIcon } from '@/utils/img/imgInVite';
     }
 
     .right-box {
-        order-radius: 8%;
+        border-radius: 8%;
         width: 800px;
         height: 300px;
 
-        // background-color: red;
         .welcome-ad {
             display: flex;
             display: flex;
