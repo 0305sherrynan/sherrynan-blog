@@ -18,7 +18,8 @@ import { useRouter } from 'vue-router';
 import SortCount from "@/components/Category/SortCount.vue";
 import Banner from '@/components/Banner/Banner.vue';
 import ArticleLists from '@/components/Article/ArticleLists.vue';
-import { onBeforeUnmount, reactive, ref, watch, computed, nextTick } from 'vue';
+import {  reactive, ref} from 'vue'
+import {DataTypeJudge} from '@/utils/judge/index'
 /**
  * data 
  * routeChange 告知子组件路由切换了
@@ -40,7 +41,6 @@ specialArticle = await (await getArticleInfoBySort(router.currentRoute.value.que
 /**
  * methods
  * specialArticleShouldChange 子组件sort-count标签被切换 另外一个子组件article-list的数据也要被改变
- * DataTypeJudge
  */
 const specialArticleShouldChange = async () => {
 
@@ -48,9 +48,7 @@ const specialArticleShouldChange = async () => {
     routeChange.value = !routeChange.value
 
 }
-const DataTypeJudge = (data:unknown):data is {message:string} =>{
-     return (data as {message:string}).message == undefined
-}
+
 /**
  * operate
  * 判断是否有内容从而展示不同的内容
