@@ -102,8 +102,6 @@ const goToRegister = () => {
 const validateSuccess = async () => {
 
     const { data: data } = await verifyLoginInfo(userForm)
-    // const result = data.data
-    // console.log(data)
     if (data.message == 'error') message.error('账号或者密码错误！')
     else {
         message.success('验证成功')
