@@ -18,6 +18,7 @@
                             <a-select-option value="css">css</a-select-option>
                             <a-select-option value="vue">vue</a-select-option>
                             <a-select-option value="leetcode">leetcode</a-select-option>
+                            <a-select-option value="ts">ts</a-select-option>
                         </a-select></a-form-item>
                     <a-form-item label="时间" name="time"> 
                             <el-date-picker v-model="formData.time" type="datetime"
@@ -40,6 +41,7 @@ import { ref, reactive } from 'vue';
 import VueMarkdownEditor, { xss } from '@kangc/v-md-editor';
 import {submitOneArticleInfo} from '@/utils/api/article';
 import { randomId } from '@/utils/random/randomId';
+import { func } from 'vue-types';
 
 /**
  * data
@@ -104,12 +106,14 @@ const submitForm = async()=>{
          const cover = reader.result?.toString().replace(/^data:image\/\w+;base64,/, '')
          formData.cover = cover as string
          console.log(cover)
-  }, false);
+  }, false)
+  reader.addEventListener("loadend",async function(){
     const  infoHTML =  xss.process(VueMarkdownEditor.vMdParser.themeConfig.markdownParser.render(formData.info))
-    console.log(formData,infoHTML)
-    const data = await submitOneArticleInfo(Object.assign(formData,{info:infoHTML,article_id:randomId(-10)}))
-    //重置表单
+    await submitOneArticleInfo(Object.assign(formData,{info:infoHTML,article_id:randomId(-10)}))
+       //重置表单
     resetFormdata()
+    })
+
 }
 </script>
 
