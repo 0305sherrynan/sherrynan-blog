@@ -16,7 +16,7 @@ import { getArticleInfo, getArticleSortAndNumber } from '@/utils/api/article'
 
 import ArticleLists from "@/components/Article/ArticleLists.vue";
 import ArticleCategory from '@/components/Article/ArticleCategory.vue';
-
+import {DataTypeJudge} from '@/utils/judge/index'
 import { ref } from 'vue';
 /**
  * getData 用户数据获取 ： 可能不符合条件
@@ -36,17 +36,6 @@ const { data: getDataSort } = await getArticleSortAndNumber()
 let sortAndNumber: Article.article_sort[] = []
 const isExistData = ref<boolean>(false)
 
-/**
- * methods
- * goToArticleDetail 实现路由跳转至文章详情 携带参数query
- * goToSpecialSortList 跳转到特殊分类的文章列表
- * DataTypeJudge 判断数据是否有，没有的话是返回message
- */
-
-
-const DataTypeJudge = (data: unknown): data is { message: string } => {
-    return (data as { message: string }).message == undefined
-}
 /**
  * operate 
  * 判断是否有内容从而展示不同的内容
