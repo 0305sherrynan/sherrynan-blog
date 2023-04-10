@@ -1,5 +1,6 @@
 /**
  * formatDateTime 将形如2023-03-22T13:12:42.000Z 改格式为2023-03-03 16:07:12
+ * currentTime 返回当前的事件 格式：2023-03-03 16:07:12
  */
 
     //
@@ -19,3 +20,8 @@
 		const s = addZero(time.getSeconds());
 		return Y + M + D + h + m + s;
     }
+	export const currentTime = ():string=> {
+		const time = new Date()
+		return formatDateTime(time.toString())
+
+	}
