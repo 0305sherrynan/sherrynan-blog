@@ -19,11 +19,13 @@ swaggerInstall(app)
 const daily = require('./Router/dailyRoutes')
 const article = require('./Router/articleRoutes')
 const user = require('./Router/userRoutes.js')
+const comment = require('./Router/commentRoutes.js')
 
 //使用接口
 app.use('/api/daily',daily)
 app.use('/api/article',article)
 app.use('/api/user',user)
+app.use('/api/comment',comment)
 
 app.get('/zwz',(req,res)=>{
     res.send('当前服务器已连接')
