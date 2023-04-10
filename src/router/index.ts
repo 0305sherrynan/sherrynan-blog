@@ -10,18 +10,14 @@ const routes: RouteRecordRaw[] = [
         redirect:'/home',
         component: () => import('@/views/blog/layout/index.vue'),
         meta:{
-            //是否不需要token权限
+            //需要token权限
             freePass:false
         },
         children: [
             {
                 path: 'home',
                 name: 'master',
-                component: () => import('@/views/blog/Master/Master.vue'),
-                // meta:{
-                //     //是否不需要token权限
-                //     freePass:false
-                // },
+                component: () => import('@/views/blog/Master/Master.vue')
             },
             {
                 path: 'daily',
@@ -55,11 +51,11 @@ const routes: RouteRecordRaw[] = [
                     freePass:true
                 }
             },
-            // {
-            //     path:'register',
-            //     name:'register',
-            //     component:() => import('../views/blog/LoginAndRegi/index.vue')
-            // }
+            {
+                path: 'message',
+                name: 'message',
+                component: () => import('@/views/blog/message/index.vue')
+            },
         ]
     },
 
