@@ -29,3 +29,21 @@ export namespace userApi{
         data: T
     } 
 }
+export namespace commentApi{
+    interface postRequestResponse<T> {
+        code: number,
+        data: T
+    }  
+    interface getRequestResponse<T> {
+        code: number,
+        data: Array<T>
+    }
+    interface getSonComentByid{
+        id:string
+        coverimg:string
+        nickname:string
+        info:string
+        time:string
+        replyid:id
+    }
+}
