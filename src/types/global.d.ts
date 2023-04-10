@@ -46,3 +46,18 @@ declare namespace User{
         coverimg:string | null
     }
 }
+
+declare namespace Comment {
+    interface submitComment{
+        id:string
+        info:string
+        time:string
+    }
+    interface getParentComent {
+        id:string
+        info:string
+        time:string
+        nickname:string
+        coverimg:string
+    }
+}
