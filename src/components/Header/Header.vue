@@ -10,7 +10,7 @@
                     <el-menu-item><router-link :to="{ name: 'daily' }">日常RECORD</router-link></el-menu-item>
                     <el-menu-item><router-link :to="{ name: 'admin' }" target="_blank">ADMIN</router-link></el-menu-item>
                     <el-menu-item><router-link :to="{ name: 'article' }">文章</router-link></el-menu-item>
-                    <el-menu-item>关于作者</el-menu-item>
+                    <el-menu-item><router-link :to="{ name: 'message' }">留言板</router-link></el-menu-item>
 
                     <el-sub-menu index="2" class="personal-drop-down">
                         <template #title>
