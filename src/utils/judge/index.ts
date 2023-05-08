@@ -8,5 +8,9 @@ export const DataTypeJudge = (data:unknown):data is {message:string} =>{
 // }
 
 export const DataTypeJudgeParentID = (data:unknown):data is {parentid:string} =>{
-    return (data as {parentid:string}).parentid == undefined
+    return (data as {parentid:string}).parentid == undefined 
+}
+
+export const DataTypeJudgeReplyid = (data:unknown):data is {replyid:string} =>{
+    return (data as {replyid:string}).replyid == undefined || (data as {replyid:string}).replyid == ''
 }

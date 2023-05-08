@@ -15,16 +15,17 @@ import { getPersonInfo } from '@/utils/api/user'
  * coverAndNick 头像和昵称获取 后续改从storage获取
  * messageAll 获取所有的主留言内容
  */
-const {data:coverAndNick} = await getPersonInfo()
-const {data:allCommentInfo} = await getParentCom() 
-// const {data::sonMessage} = await getSonCom()
+
+const a =  getPersonInfo()
+const b =  getParentCom() 
+const [{data:coverAndNick},{data:allCommentInfo}] =  await Promise.all([a,b])
 
 </script>
 
 <style scoped lang="less">
 .comment-area {
-    width: 500px;
-    height: 1000px;
+    width: 100%;
+   height: 1000px;
     padding: 0 30px;
 }
 </style>

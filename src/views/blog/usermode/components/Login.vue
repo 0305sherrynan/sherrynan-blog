@@ -35,6 +35,7 @@ import type { Rule } from 'ant-design-vue/es/form'
 import { da } from 'element-plus/es/locale';
 import { message } from 'ant-design-vue';
 import { StorageHandler, StorageType } from '@/libs/storage'
+import {checkEmail, checkPhone} from '@/utils/regExp/index'
 
 /**
  * 数据
@@ -60,8 +61,7 @@ let validatePass = async (_rule: Rule, value: string) => {
     if (value === '') {
         return Promise.reject('Please input the email');
     } else {
-        if (!reg.emailRe.test(value)) {
-            // console.log(value)
+        if (!checkEmail(value) && !checkPhone(value)) {
             return Promise.reject('请输入正确的邮箱格式')
         }
     }

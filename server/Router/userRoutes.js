@@ -15,6 +15,7 @@ router.post('/register',(req,res)=>{
 router.get('/getInfo',$jwt.verify,(req,res)=>{
     $sql.getPersonInfo(req,res)
 })
+
 router.post('/modifyInfo',$jwt.verify,(req,res)=>{
     $sql.modifyPersonInfo(req,res)
 })

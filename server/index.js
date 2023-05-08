@@ -20,12 +20,16 @@ const daily = require('./Router/dailyRoutes')
 const article = require('./Router/articleRoutes')
 const user = require('./Router/userRoutes.js')
 const comment = require('./Router/commentRoutes.js')
+const detail = require('./Router/detailRoutes.js')
+const fans = require('./Router/fansRoutes.js')
 
 //使用接口
 app.use('/api/daily',daily)
 app.use('/api/article',article)
 app.use('/api/user',user)
 app.use('/api/comment',comment)
+app.use('/api/detail',detail)
+app.use('/api/fans',fans)
 
 app.get('/zwz',(req,res)=>{
     res.send('当前服务器已连接')
@@ -34,7 +38,7 @@ app.get('/zwz',(req,res)=>{
 // var path = require('path');
 
 //监听接口
-app.listen(3000,function(){
+app.listen(3100,function(){
     console.log('Sherry_Blog_Server Ready')
 })
 

@@ -1,7 +1,5 @@
 import { requestInstance } from "@/libs/axios";
-import { userApi } from "@/types/api";
-import {StorageHandler,StorageType} from '@/libs/storage'
-import { da } from "element-plus/es/locale";
+import { getRequestResponse,postRequestResponse } from "@/types/api";
 
 /**
  * verifyLoginInfo 验证登录信息
@@ -13,21 +11,24 @@ import { da } from "element-plus/es/locale";
  */
 
 export const verifyLoginInfo = (dataForm:{})=>{
-    return requestInstance.post<any,userApi.postRequestResponse<{message:string,token:string}>>('zwz/api/user/login',dataForm)
+    return requestInstance.post<any,postRequestResponse<{message:string,token:string}>>('zwz/api/user/login',dataForm)
 }
 export const judgeEmailRegisted = (email:string)=>{
-    return requestInstance.post<any,userApi.postRequestResponse<{message:string}>>('zwz/api/user/judgeRegisterd',{email})
+    return requestInstance.post<any,postRequestResponse<{message:string}>>('zwz/api/user/judgeRegisterd',{email})
 }
 export const registerAccount = (dataForm:{})=>{
-    return requestInstance.post<any,userApi.postRequestResponse<{message:string}>>('zwz/api/user/register',dataForm)
+    return requestInstance.post<any,postRequestResponse<{message:string}>>('zwz/api/user/register',dataForm)
 }
 export const getPersonInfo = ()=>{
-    return requestInstance.get<any,userApi.postRequestResponse<User.get_personal_info>>('zwz/api/user/getInfo')
+    return requestInstance.get<any,postRequestResponse<User.get_personal_info>>('zwz/api/user/getInfo')
+}
+export const getPersonInfoById = (id:string)=>{
+    return requestInstance.get<any,postRequestResponse<User.get_personal_info_detail>>(`zwz/api/user/getInfo/${id}`)
 }
 export const modifyPersonInfo = (dataForm:{})=>{
     console.log('req',dataForm)
-    return requestInstance.post<any,userApi.postRequestResponse<{message:string}>>('zwz/api/user/modifyInfo',dataForm)
+    return requestInstance.post<any,postRequestResponse<{message:string}>>('zwz/api/user/modifyInfo',dataForm)
 }
 export const modifyPasInfo = (dataForm:{})=>{
-    return requestInstance.post<any,userApi.postRequestResponse<{message:string}>>('zwz/api/user/modifyPas',dataForm)
+    return requestInstance.post<any,postRequestResponse<{message:string}>>('zwz/api/user/modifyPas',dataForm)
 }

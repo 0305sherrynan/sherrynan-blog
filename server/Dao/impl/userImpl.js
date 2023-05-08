@@ -22,16 +22,16 @@ module.exports = {
         const query = req.body
         pool.getConnection((err,connection)=>{
             // const params = req.query
-            console.log(query)
+           
             connection.query($sql.verifyLoginInfo,[query.email,query.password],
                 (err,result)=>{
                 let r = {}
-                console.log(result)
+                
                 //以用户id作为token的生成
                 
                 if (result!=false){
                     const token = $jwt.sign({_id:result[0].user_id})
-                    // console.log($jwt.sign(result[0].user_id))
+                  
                     r = {
                         code:200,
                         data:{message:'success',token}
@@ -53,7 +53,7 @@ module.exports = {
         const query = req.body
         pool.getConnection((err,connection)=>{
             // const params = req.query
-            console.log(query)
+          
             connection.query($sql.judgeEmailRegisted,[query.email],
                 (err,result)=>{
                 let r = {}
@@ -81,7 +81,7 @@ module.exports = {
     registerAccount :(req, res)=>{
         const query = req.body
         pool.getConnection((err,connection)=>{
-            console.log(query)
+           
             connection.query($sql.registerAccount,[query.user_id,query.email,query.password,query.nickname,query.coverimg],
                 (err,result)=>{
                 let r = {}
@@ -109,11 +109,11 @@ module.exports = {
         
         pool.getConnection((err,connection)=>{
             // const params = req.query
-            // console.log(query)
+          
             connection.query($sql.getPersonInfo,[req._id],
                 (err,result)=>{
                 let r = {}
-                console.log(result[0])
+                console.log('get',result[0])
                 if (result!=false){
                   
                     r = {
@@ -133,16 +133,17 @@ module.exports = {
             })
         })
     },
+
     
     modifyPersonInfo :(req, res)=>{
         
         pool.getConnection((err,connection)=>{
             const params = req.body
-            console.log('123',params.nickname)
+            
             connection.query($sql.modifyPersonInfo,[params.email,params.password,params.nickname,$utils.takeUrlToLocal(params.coverimg),req._id],
                 (err,result)=>{
                 let r = {}
-                console.log(result[0])
+         
 
                 if (result!=false){
                   
@@ -168,11 +169,11 @@ module.exports = {
         
         pool.getConnection((err,connection)=>{
             const params = req.body
-            // console.log($utils.takeUrlToLocal(params.coverimg))
+          
             connection.query($sql.modifyPasInfo,[params.newPas,req._id],
                 (err,result)=>{
                 let r = {}
-                // console.log(result[0])
+        
 
                     r = {
                         code:200,

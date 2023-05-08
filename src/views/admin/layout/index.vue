@@ -6,14 +6,7 @@
         <a-layout-sider v-model:collapsed="collapsed" collapsible>
             <div class="logo" />
             <a-menu v-model:selectedKeys="selectedKeys" theme="dark" mode="inline">
-                <!-- <a-menu-item key="1">
-                    <pie-chart-outlined />
-                    <span>Option 1</span>
-                </a-menu-item> -->
-                <!-- <a-menu-item key="2">
-                    <desktop-outlined />
-                    <span>Option 2</span>
-                </a-menu-item> -->
+
                 <a-sub-menu key="sub1">
                     <template #title>
                         <span>

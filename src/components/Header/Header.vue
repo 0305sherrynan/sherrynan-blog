@@ -3,7 +3,7 @@
         <Transition name="head">
             <div class="header-box">
                 <el-menu class="right-box">
-                    <el-menu-item>Sherrynan</el-menu-item>
+                    <el-menu-item>{{ data.nickname }}</el-menu-item>
                 </el-menu>
                 <el-menu mode="horizontal" class="right-box">
                     <el-menu-item><router-link :to="{ name: 'master' }">首页</router-link><span></span></el-menu-item>
@@ -14,13 +14,14 @@
 
                     <el-sub-menu index="2" class="personal-drop-down">
                         <template #title>
-                            <img :src="returnImg('brian.png')" class="personal-img" alt="">
+                            <img :src="data.coverimg?returnDBImg(data.coverimg):returnImg('generalHead.svg')" class="personal-img" alt="">
                         </template>
                         <el-menu-item><router-link
                                 :to="{ name: 'entrance', params: { operate: 'login' } }">登录</router-link></el-menu-item>
-                        <el-menu-item>个人中心</el-menu-item>
+                        <el-menu-item><router-link
+                                :to="{ name: 'middle'}">个人中心</router-link></el-menu-item>
                         <el-menu-item>前往后台</el-menu-item>
-                        <el-menu-item @click="exitAccount">退出</el-menu-item>
+                        <el-menu-item @click="exitAccount"><router-link :to="{ name: 'entrance', params: { operate: 'login' } }">退出</router-link></el-menu-item>
                     </el-sub-menu>
 
                 </el-menu>
@@ -30,9 +31,15 @@
 </template>
 
 <script setup lang="ts">
-import { StorageHandler, StorageType } from '@/libs/storage';
-import { returnImg } from '@/utils/img/imgInVite'
+import { StorageHandler, StorageType } from '@/libs/storage'
+import { returnImg,returnDBImg } from '@/utils/img/imgInVite'
 import router from '@/router';
+import {getPersonInfo} from '@/utils/api/user'
+
+/**
+ * data
+ */
+const {data} = await getPersonInfo()
 
 
 /**
@@ -43,7 +50,7 @@ const exitAccount = () => {
     const storage = new StorageHandler()
     //清除token
     storage.remove(StorageType.Local, 'token')
-    router.push({ name: 'entrance', params: { operate: 'login' } })
+   
 
 }
 </script>

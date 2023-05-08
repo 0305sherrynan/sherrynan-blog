@@ -1,13 +1,13 @@
 <script setup lang="ts">
-// import { fa, tr } from 'element-plus/es/locale';
-import { onBeforeMount, onMounted, ref, watch } from 'vue';
-import Header from '@/components/Header/Header.vue';
-import { returnImg ,returnIcon} from '@/utils/img/imgInVite';
-import Master from '@/views/blog/Master/Master.vue';
+import { onBeforeMount, onMounted, ref, watch } from 'vue'
+// import Header from '@/components/Header/Header.vue'
+import { returnImg ,returnIcon} from '@/utils/img/imgInVite'
+import Master from '@/views/blog/Master/Master.vue'
 import {getDailyInfo} from '@/utils/api/daily'
-import { da } from 'element-plus/es/locale';
-import { useRouter } from 'vue-router'; 
-import { useScoll } from '@/hooks/useScroll';
+import { da } from 'element-plus/es/locale'
+import { useRouter } from 'vue-router'
+import { useScoll } from '@/hooks/useScroll'
+import { defineAsyncComponent } from 'vue'
 
 /**
  * data
@@ -19,6 +19,10 @@ let {nowScrollPos} = useScoll()
 let hiddenHead = ref<boolean>(false)
 let hiddenRocket = ref<boolean>(false)
 const router = useRouter()
+
+const Header = defineAsyncComponent(() => 
+  import('@/components/Header/Header.vue')
+)
 /**
  * methods 
  * turnTop 用于跳转到最顶部 
@@ -60,7 +64,7 @@ watch(nowScrollPos,(newValue,oldValue)=>{
   background-color: rgba(255,255,255,0.5);
 }
 .header{
-  // float: right;
+ 
   position: fixed;
   top: 0;
   z-index: 999;

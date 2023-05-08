@@ -4,9 +4,7 @@
             <textarea name="" id="" cols="30" rows="2" placeholder="写下你的评论" v-model="textOutput"></textarea>
             <a-button type="primary" style="margin-left: 20px;height: 50px;border-radius: 6px;" @click="submitComment">发布</a-button>
         </div>
-        <div class="emoji-btn-box">
 
-        </div>
         <div class="emoji-big-box">
             <button @click="openEmoji" style="width: 80px;margin-top: 20px;">Emoji表情</button>
             <Picker :data="emojiIndex" title="Pick your emoji…" emoji="point_up" @select="showEmoji" v-show="isOpenEmoji"
@@ -57,7 +55,7 @@ const openEmoji = (): void => {
 const submitComment = async () :Promise<void> => {
     //若为主动评论（父评论），则提交数据到父表
     if (props.parentObj == undefined) {
-        let data = {
+        const data =  {
             id: randomId(8),
             info: textOutput.value,
             time: currentTime()
@@ -68,15 +66,32 @@ const submitComment = async () :Promise<void> => {
     }
     //若为回复  情况一 ：回复父评论 则提交到子表
      if (props.rootParentObj == undefined) {
-        let data = {
+        const data = {
             id: randomId(8),
             info: textOutput.value,
             time: currentTime(),
             parentid: props.parentObj,
-            replyid: '1q'
+            replyid: ''
         }
         await submitSonCom(data)
+        return
     }
+    //情况二： 回复的是父评论里面的子回复 则提交到子表时，需要带上父id和被回复的用户的replyid
+    else {
+        console.log('情况二')
+        const data = {
+            id:randomId(8),
+            info:textOutput.value,
+            time:currentTime(),
+            parentid:props.rootParentObj,
+            replyid:props.parentObj
+        }
+        console.log('submit',data)
+        await submitSonCom(data)
+    }
+    
+    
+
 
 }
 </script>
@@ -92,11 +107,26 @@ const submitComment = async () :Promise<void> => {
     .row-box {
         display: flex;
         flex-direction: row;
+        textarea{
+            border: 1px solid #dcdfe6;
+            &:focus-visible{
+                outline-color: #c9ccd0;
+            }
+        }
     }
 
     .emoji-big-box {
         position: relative;
-
+        >button{
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            height: 35px;
+            background-color: white;
+            &:hover{
+                cursor: pointer;
+                background-color: rgb(240,240,240);
+            }
+        }
         .emoji-box {
             position: absolute;
             top: 20px;

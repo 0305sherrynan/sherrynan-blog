@@ -5,6 +5,7 @@ import 'element-plus/dist/index.css'
 import './design/index.less'
 import router from './router'
 import  './router/guard'
+import './store/index'
 
 import Antd from 'ant-design-vue';
 import 'ant-design-vue/dist/antd.css';
@@ -27,9 +28,10 @@ import Prism from 'prismjs';
 // highlightjs 核心代码
 import hljs from 'highlight.js/lib/core';
 // 按需引入语言包
-import javascript from 'highlight.js/lib/languages/javascript';
-
-hljs.registerLanguage('javascript', javascript);
+import javascript from 'highlight.js/lib/languages/javascript'
+import typescript from 'highlight.js/lib/languages/typescript'
+hljs.registerLanguage('javascript', javascript)
+hljs.registerLanguage('typescript', typescript)
 VueMarkdownEditor.use(vuepressTheme, {
   Prism,
 });

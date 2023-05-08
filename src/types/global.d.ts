@@ -45,6 +45,13 @@ declare namespace User{
         password:string
         coverimg:string | null
     }
+    interface get_personal_info_detail{
+        nickname:string
+        email:string
+        coverimg:string | null
+        gender:string
+        signature:string
+    }
 }
 
 declare namespace Comment {
@@ -59,5 +66,15 @@ declare namespace Comment {
         time:string
         nickname:string
         coverimg:string
+    }
+}
+declare namespace Detail {
+    interface getDetailInfo {
+        signature:string
+        gender:string
+    }
+    interface modifyInfo {
+        signature:string
+        gender:string
     }
 }

@@ -112,4 +112,30 @@ module.exports = {
             })
         })
     },
+    getReplyedInfo :(req, res)=>{
+        let query = req.params
+        console.log(query)
+        pool.getConnection((err,connection)=>{
+            connection.query($sql.getReplyedInfo,[query.replyid],
+                (err,result)=>{
+                let r = {}
+                console.log('123',result)
+                if (result!=undefined){
+                    r = {
+                        code:200,
+                        data:result[0]
+                        
+                    }
+                }
+                else{
+                    r={
+                        code:200,
+                        data:{message:'无子表数据'}
+                    }
+                }
+                $utils.closeConnection(res,r,connection)
+
+            })
+        })
+    },
 }

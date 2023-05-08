@@ -7,11 +7,9 @@
         <div class="person-span-box">
             <span class="person-nickname">{{ singleInfo.item.nickname }}</span>
             <div class="author-box">
-                <span class="person-reply" @mouseover="mouseOverEvent" @mouseout="mouseOutEvent">回复 @{{ (singleInfo.item as
-                    commentApi.getSonComentByid).replyid }}</span>
-                <author-card  class="authorCard" :authorID="(singleInfo.item as commentApi.getSonComentByid).replyid" v-show="isShowReplyAuthor"></author-card>
+                <span class="person-reply" @mouseenter="mouseOverEvent"  @mouseleave="mouseOutEvent" v-if="(singleInfo.item as commentApi.getSonComentByid).replyid">回复 @{{ replyedInfo.nickname }}</span>
+                <author-card  class="authorCard" @mouseenter="mouseOverEvent" @mouseleave="mouseOutEvent" :replyedInfo="replyedInfo" v-if="isShowReplyAuthor"></author-card>
             </div>
-
         </div>
 
         <span class="person-info">{{ singleInfo.item.info }}</span>
@@ -34,13 +32,17 @@ import AuthorCard from '../Author/AuthorCard.vue'
 import {
     MessageOutlined
 } from '@ant-design/icons-vue';
-import { ref } from 'vue';
+import { reactive, ref } from 'vue';
 import { commentApi } from '#/api'
+import { DataTypeJudgeReplyid } from '@/utils/judge';
+import { getReplyedInfo } from '@/utils/api/comment';
+import { getDailInfoByID } from '@/utils/api/detailinfo';
 
 
 /**
  * isShowComment 是否显示评论区
  * isShowReplyAuthor 是否显示被回复者的个人信息
+ * replyedInfo 被回复者的信息
  */
 
 
@@ -50,6 +52,18 @@ interface propsInterface {
 const props = defineProps<propsInterface>()
 const isShowComment = ref<number>(-1)
 const isShowReplyAuthor = ref<boolean>(false)
+let replyedInfo:any = {}
+//有replyid（为回复对方的留言），则获取被回复者的信息
+if (!DataTypeJudgeReplyid(props.singleInfo.item))  {
+    //获得核心的信息
+    console.log(props.singleInfo.item.info,(props.singleInfo.item as commentApi.getSonComentByid).replyid)
+   const keyInfo = await getReplyedInfo({replyid:(props.singleInfo.item as commentApi.getSonComentByid).replyid})
+   console.log(keyInfo)
+   const detailInfo = await getDailInfoByID((props.singleInfo.item as commentApi.getSonComentByid).replyid)
+   console.log(detailInfo)
+   replyedInfo = Object.assign({},keyInfo.data,detailInfo.data)
+
+}
 
 
 
@@ -67,12 +81,17 @@ const isShowComBox = (key: any) => {
     else isShowComment.value = key
 }
 const mouseOverEvent = () => {
+    console.log('out')
     isShowReplyAuthor.value = true
 }
 const mouseOutEvent = () => {
+    console.log('out')
     isShowReplyAuthor.value = false
 }
 </script>
+
+
+
 
 <style scoped lang="less">
 .parentImg {
@@ -94,7 +113,7 @@ const mouseOutEvent = () => {
 
     .authorCard {
         position: absolute;
-        bottom: 20px;
+        bottom: 0px;
         left: 20px;
     }
 }
@@ -130,6 +149,12 @@ const mouseOutEvent = () => {
 
     .person-reply {
         margin-left: 5px;
+        
+        color: #00a1d6;
+        &:hover{
+            color: #f25d8e;
+            cursor: pointer;
+        }
     }
 
     .reply-span {

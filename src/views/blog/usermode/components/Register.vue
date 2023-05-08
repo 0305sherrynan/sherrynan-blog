@@ -44,6 +44,7 @@ import type { Rule } from 'ant-design-vue/es/form'
 import { judgeEmailRegisted, registerAccount } from '@/utils/api/user'
 import { message } from 'ant-design-vue';
 import { randomId } from '@/utils/random/randomId'
+import {checkEmail,checkPhone} from '@/utils/regExp/index'
 /**
  * 数据
  * formRef
@@ -52,9 +53,6 @@ import { randomId } from '@/utils/random/randomId'
  * rules 表单规则 validatePass
  */
 const formRef = ref<HTMLFormElement>()
-const reg = {
-    emailRe: /^[a-zA-Z0-9]+([-_.][A-Za-zd]+)*@([a-zA-Z0-9]+[-.])+[A-Za-zd]{2,5}$/
-}
 const route = useRouter()
 const emit = defineEmits(['clickSignUp'])
 const registerForm = reactive<User.verify_register_user>({
@@ -67,7 +65,7 @@ let validatePass = async (_rule: Rule, value: string) => {
     if (value === '') {
         return Promise.reject('Please input the email');
     } else {
-        if (!reg.emailRe.test(value)) {
+        if (!checkEmail(value) && !checkPhone(value)) {
             // console.log(value)
             return Promise.reject('请输入正确的邮箱格式')
         }
